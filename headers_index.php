@@ -85,7 +85,7 @@ function header_administracion()
         <li
         style="margin:10px;color: black; background-color: rgba(240, 248, 255, 0.02);"
         >
-        <a class="drop" href="cuenta_admin.php"
+        <a class="drop" href="cuenta.php"
         >Ir a mi cuenta</a
         >
         </li>

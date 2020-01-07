@@ -13,8 +13,6 @@
 
 <body>
   <?php
-
-
   if (isset($_SESSION['login'])) {
     echo 'Hola';
   } else echo 'Sin Session';

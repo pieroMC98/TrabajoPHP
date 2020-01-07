@@ -81,7 +81,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a style="padding: 0.5rem 1rem" href="registro.html">Registrarse</a>
+                            <a style="padding: 0.5rem 1rem" href="registro.php">Registrarse</a>
                         </li>
                     </ul>
                 </div>
@@ -94,6 +94,18 @@
         <div class="row">
             <div class="col-sm">
                 <a href="pelicula.html"><img src="img/frozen.jpg" alt="Frozen 2" title="Frozen 2" class="rounded float-left index" /></a>
+            </div>
+            <div class="col-sm">
+                <form action="pelicula.php" method="get">
+                    <input  type="hidden" 
+                    name="Pelicula[nombre]" value="Frozen" />
+
+                    <input type="image"
+                            src="img/frozen.jpg"
+                            name="Pelicula[imagen]"
+                            class="rounded float-left index" alt="submit" />
+                </form>
+
             </div>
             <div class="col-sm">
                 <img src="img/adios.jpg" alt="Adiós" title="Adiós" class="rounded float-left index" />
