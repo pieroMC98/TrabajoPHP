@@ -7,15 +7,14 @@
     <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
     <title>Peliculas</title>
     <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/estilos.css" /> 
-       <?php include 'libs.php' ?>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <?php include 'libs.php' ?>
 </head>
 
-<body>  
-        <?php 
-         @header_index($_SESSION['email']);
-         ?>
-    <!--header  -->
+<body>
+    <?php
+    @header_index($_SESSION['email']);
+    ?>
     <div class="containernav">
         <header>
             <nav class="navbar navbar-expand-lg navbar-collapse navbar-light bg-light">
@@ -72,11 +71,11 @@
                                         <a class="drop" href="favoritos_admin.html">Ver tus favoritos</a>
                                     </li>
                                     <li style="margin:10px">
-                                        <a class="drop" href="criticas_admin.html">Ver tus criticas</a>
+                                        <a class="drop" href="criticas.html">Ver tus criticas</a>
                                     </li>
                                     <li class="dropdown-divider"></li>
                                     <li style="margin:10px">
-                                        <a class="drop" href="preferencias_admin.html">Preferencias</a>
+                                        <a class="drop" href="#">Preferencias</a>
                                     </li>
                                     <li style="margin:10px">
                                         <a class="drop" href="administracion.html">Opciones de administrador</a>
@@ -97,117 +96,93 @@
         </header>
     </div>
 
-    <br />
-    <div class="container">
-        <?php 
-            cuenta_header($_SESSION['login']);
-        ?>
-    </div>
-    <div class="container">
-        <div class="span3 well">
-            <div class="center">
-                <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" alt="aboutme" width="140" height="140" class="img-circle" /></a>
-                <h3>Pablo Pérez</h3>
-                <em>Abre la imágen para saber más detalles</em>
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 style="margin-top: 10px">Nombre de usuario</h1>
             </div>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            Más sobre tu usuario
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="center">
-                            <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
-                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" alt="aboutme" width="140" height="140" class="img-circle" /></a>
-
-                            <h3 class="media-heading">Pablo Pérez <small>España</small></h3>
-                            <span><strong>Generos favoritos: </strong></span>
-                            <span class="label label-warning">Comedia</span>
-                            <span class="label label-info">Thriller</span>
-                            <span class="label label-info">Aventuras</span>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" style="color: blue">
-                                Añadir género
-                            </button>
-                        </div>
-                        <hr />
-                        <div class="center">
-                            <p class="text-left">
-                                <strong>Biografía: </strong><br />
-                                (Sin biografía)
-                            </p>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                Modificar biografía
-                            </button>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" />
+                    <h6>Cambiar foto de perfil...</h6>
+                    <input type="file" class="text-center center-block file-upload" />
                 </div>
-                <div class="modal-footer">
-                    <div class="center">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Salir
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="main row">
-            <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-                <h1>Bienvenido a tu cuenta</h1>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Nombre:</th>
-                    </tr>
-                    <tr>
-                        <th>Nombre de usuario:</th>
-                    </tr>
-                    <tr>
-                        <th>Correo electrónico:</th>
-                    </tr>
-                    <tr>
-                        <th>Fecha de nacimiento:</th>
-                    </tr>
-                </table>
-
-                <input type="button" class="btn btn-success" value="Opciones de administrador" onclick="location.href = 'administracion.html';" />
-            </article>
-
-            <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                 <br />
-                <a class="aside" href="modificar_usuario_admin.html">
-                    <p>Modificar tus datos</p>
-                </a>
-                <a class="aside" href="favoritos_admin.html">
-                    <p>Ver favoritos</p>
-                </a>
-                <a class="aside" href="criticas_admin.html">
-                    <p>Leer tus críticas</p>
-                </a>
-                <a class="aside" href="preferencias_admin.html">
-                    <p>Preferencias</p>
-                </a>
-            </aside>
+            </div>
+            <!--/col-3-->
+            <div class="col-sm-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <hr />
+                        <form class="form" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Nombre</label>
+                                    <input type="text" class="form-control" name="name" id="first_name" placeholder="Nombre real" title="Introduce tu nombre real." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Apellido</label>
+                                    <input type="text" class="form-control" name="name" id="lastName" placeholder="Nombre real" title="Introduce tu nombre real." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="last_name">Nombre de usuario></label>
+                                    <input type="text" class="form-control" name="nick" id="last_name" placeholder="Nombre de usuario" title="Introduce tu nombr de usuario." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="email">Cambiar email></label>
+                                    <input type="email" class="form-control" name="correo" id="email" placeholder="you@email.com" title="Introduce tu email." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="password">Cambiar contraseña</label>
+                                    <input type="password" class="form-control" name="pass" id="password" placeholder="Contraseña" title="Introduce la nueva contraseña." />
+
+                                    <input style="margin-top:5px " type="password" class="form-control" name="passR" id="password2" placeholder="Repite tu contraseña" title="Repite la contraseña." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br />
+                                    <button class="btn btn-lg btn-success" type="submit">
+                                        <i class="glyphicon glyphicon-ok-sign"></i> Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                        @$user['name'] = htmlspecialchars($_POST['name']);
+                        @$user['lastName'] = htmlspecialchars($_POST['lastName']);
+                        @$user['email'] = htmlspecialchars($_POST['correo']);
+                        @$user['nick'] = htmlspecialchars($_POST['nick']);
+                        @$user['pass'] = htmlspecialchars($_POST['pass']);
+                        @$user['passR'] = htmlspecialchars($_POST['passR']);
+                        @$user['Fnac'] = htmlspecialchars($_POST['Fnac']);
+                        registro_update($user);
+                        ?>
+                        <hr />
+                    </div>
+                    <!--/tab-content-->
+                </div>
+                <!--/col-9-->
+            </div>
+            <!--/row-->
         </div>
     </div>
 
-    <div class="container">
-        <?php cuenta($_SESSION['login']);?>
-    </div>
     <footer>
-        <a class="footer" href="aviso_legal_admin.html#Aviso_Legal">Aviso Legal</a>
+        <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.html#Politica_de_privacidad">Política de privacidad</a>
         |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_privacidad">Política de privacidad</a>
-        |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.html#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 

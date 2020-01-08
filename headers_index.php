@@ -53,21 +53,17 @@ function header_administracion()
         aria-label="Buscar"
         />
         </div>
+        </form>
         </li>
         
         <li class="nav-item">
-        <div class="form-inline my-2 my-lg-0">
-        <label for="BA">Búsqueda avanzada</label>
-        <input
-        id="BA"
-        name="BA"
-        type="submit"
-        value="Búsqueda avanzada"
-        class="btn btn-outline-success my-2 my-sm-0"
-        />
-        </div>
+        <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada.php">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Búsqueda Aavanzada
+            </button>
         </form>
-        </li>
+    </li>
+
         </ul>
         <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -183,21 +179,16 @@ function header_log()
                   aria-label="Buscar"
                   />
                   </div>
+                  </form>
                   </li>
                   
                   <li class="nav-item">
-                  <div class="form-inline my-2 my-lg-0">
-                  <label for="BA">Búsqueda avanzada</label>
-                  <input
-                  id="BA"
-                        name="BA"
-                        type="submit"
-                        value="Búsqueda avanzada"
-                        class="btn btn-outline-success my-2 my-sm-0"
-                        />
-                        </div>
-                        </form>
-                        </li>
+                  <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada.php">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                          Búsqueda Aavanzada
+                      </button>
+                  </form>
+              </li>
                         </ul>
                         
                         <ul class="navbar-nav mr-auto">
