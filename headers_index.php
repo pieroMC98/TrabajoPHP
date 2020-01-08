@@ -41,11 +41,11 @@ function header_administracion()
         </li>
         
         <li class="nav-item">
-        <form method="get" action="busqueda.php">
+        <form method="get" action="resultado_busqueda_admin.php">
         <div class="form-inline my-2 my-lg-0">
-        <label for="search">busqueda</label>
+        <label for="search"></label>
         <input
-        name="search"
+        name="title"
         id="search"
         class="form-control mr-sm-2"
         type="search"
@@ -167,11 +167,11 @@ function header_log()
                   </li>
                   
                   <li class="nav-item">
-                  <form method="get" action="busqueda.php">
+                  <form method="get" action="resultado_busqueda_admin.php">
                   <div class="form-inline my-2 my-lg-0">
-                  <label for="search">busqueda</label>
+                  <label for="search"></label>
                   <input
-                  name="search"
+                  name="title"
                   id="search"
                   class="form-control mr-sm-2"
                   type="search"
@@ -261,9 +261,19 @@ function header_visitor()
                     </li>
 
                     <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar" />
-                        </form>
+                    <form method="get" action="resultado_busqueda_admin.php">
+                    <div class="form-inline my-2 my-lg-0">
+                    <label for="search"></label>
+                    <input
+                    name="title"
+                    id="search"
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Buscar..."
+                    aria-label="Buscar"
+                    />
+                    </div>
+                    </form>
                     </li>
 
                     <li class="nav-item">

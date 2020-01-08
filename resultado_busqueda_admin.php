@@ -15,9 +15,9 @@
 <body>
     <?php header_administracion();
     $var[] = $_GET['title'];
-    $var[] = $_GET['actor'];
-    $var[] = $_GET['director'];
-    $var[] = $_GET['containt'];
+    @$var[] = $_GET['actor'];
+    @$var[] = $_GET['director'];
+    @$var[] = $_GET['containt'];
 
     $c = $var[3];
     $i = 0;

@@ -15,6 +15,8 @@ class Pelicula
   }
 }
 
+
+
 session_start();
 function connectBD()
 {
@@ -148,7 +150,8 @@ function registro($user)
     $param = "insert into usuario values('{$user['nick']}', '{$user['name']}', '{$user['lastName']}', '{$user['email']}','{$user['Fnac']}',false,'{$user['pass']}')";
     if ($user['nick'] != null && $user['name'] != null && $user['lastName'] != null && $user['email'] != null && $user['Fnac'] != null && $user['pass'] != null) {
       if (mysqli_query($_SESSION['conn'], $param)) {
-        echo "New record created successfully";
+        echo '<div class="alert alert-success" role="alert">' . "New record created successfully" . '</div>';
+
         $_SESSION['email'] = $user['email'];
         $_SESSION['password'] = $user['pass'];
         header("Location: index.php");
@@ -167,7 +170,6 @@ function printInfo($film)
 
   $query =  mysqli_query($_SESSION['conn'], $param);
   $row = mysqli_fetch_array($query, 1);
-  echo $row['title'];
   echo "<div class=\"main row\">
   <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">
       <h2>{$row['title']}</h2>
@@ -197,58 +199,60 @@ function printInfo($film)
                   <!-- Votacion por estrellas-->
                   <div class=\"vota\">
                       <h2>¡Vota esta película!</h2>
-                      <form method = \"post\">
-                          <p class=\"clasificacion\">
-                              <input id=\"radio1\" type=\"radio\" name=\"estrellas[]\" value=\"10\" />
-                              <!--
-      --><label for=\"radio1\">★</label>
-                              <!--
-      --><input id=\"radio2\" type=\"submit\" name=\"estrellas[]\" value=\"9\" />
-                              <!--
-      --><label for=\"radio2\">★</label>
-                              <!--
-      --><input id=\"radio3\" type=\"submit\" name=\"estrellas[]\" value=\"8\" />
-                              <!--
-      --><label for=\"radio3\">★</label>
-                              <!--
-      --><input id=\"radio4\" type=\"submit\" name=\"estrellas[]\" value=\"7\" />
-                              <!--
-      --><label for=\"radio4\">★</label>
-                              <!--
-      --><input id=\"radio5\" type=\"submit\" name=\"estrellas[]\" value=\"6\" />
-                              <!--
-      --><label for=\"radio5\">★</label>
-                              <!--
-      --><input id=\"radio6\" type=\"submit\" name=\"estrellas[]\" value=\"5\" />
-                              <!--
-      --><label for=\"radio6\">★</label>
-                              <!--
-      --><input id=\"radio7\" type=\"submit\" name=\"estrellas[]\" value=\"4\" />
-                              <!--
-      --><label for=\"radio7\">★</label>
-                              <!--
-      --><input id=\"radio8\" type=\"submit\" name=\"estrellas[]\" value=\"3\" />
-                              <!--
-      --><label for=\"radio8\">★</label>
-                              <!--
-      --><input id=\"radio9\" type=\"submit\" name=\"estrellas[]\" value=\"2\" />
-                              <!--
-      --><label for=\"radio9\">★</label>
-                              <!--
-      --><input id=\"radio10\" type=\"submit\" name=\"estrellas[]\" value=\"1\" style = \"display:none;\"/>
-                              <!--
-      --><label for=\"radio10\">★</label>
-                          </p>
-                          <button type = \"submit\" value = \"2\" name =\"B\">Verifica</button>
-                      </form>
+                      <form method=\"POST\">
+                      <p class=\"clasificacion\">
+                          <input id=\"radio1\" type=\"radio\" name=\"estrellas\" value=\"10\" />
+                          <!--
+  --><label for=\"radio1\">★</label>
+                          <!--
+  --><input id=\"radio2\" type=\"radio\" name=\"estrellas\" value=\"9\" />
+                          <!--
+  --><label for=\"radio2\">★</label>
+                          <!--
+  --><input id=\"radio3\" type=\"radio\" name=\"estrellas\" value=\"8\" />
+                          <!--
+  --><label for=\"radio3\">★</label>
+                          <!--
+  --><input id=\"radio4\" type=\"radio\" name=\"estrellas\" value=\"7\" />
+                          <!--
+  --><label for=\"radio4\">★</label>
+                          <!--
+  --><input id=\"radio5\" type=\"radio\" name=\"estrellas\" value=\"6\" />
+                          <!--
+  --><label for=\"radio5\">★</label>
+                          <!--
+  --><input id=\"radio6\" type=\"radio\" name=\"estrellas\" value=\"5\" />
+                          <!--
+  --><label for=\"radio6\">★</label>
+                          <!--
+  --><input id=\"radio7\" type=\"radio\" name=\"estrellas\" value=\"4\" />
+                          <!--
+  --><label for=\"radio7\">★</label>
+                          <!--
+  --><input id=\"radio8\" type=\"radio\" name=\"estrellas\" value=\"3\" />
+                          <!--
+  --><label for=\"radio8\">★</label>
+                          <!--
+  --><input id=\"radio9\" type=\"radio\" name=\"estrellas\" value=\"2\" />
+                          <!--
+  --><label for=\"radio9\">★</label>
+                          <!--
+  --><input id=\"radio10\" type=\"radio\" name=\"estrellas\" value=\"1\" />
+                          <!--
+  --><label for=\"radio10\">★</label>
+                      </p>
+                      <button class=\"btn btn-primary\" type=\"submit\" name=\"valora\">Valorar</button>
+                  </form>
                       
-                      <div class=\"btn-toolbar\" role=\"toolbar\">
-                      <button type=\"button\" class=\"btn btn-warning\">
-                      Añadir a favoritos
-                      </button>
+                      <form method=\"post\">
+                        <div class=\"btn-toolbar\" role=\"toolbar\">                      
+                        <button type=\"submit\"  name = \"addfilm\" class=\"btn btn-warning\">
+                        Añadir a favoritos
+                        </button>                      
+                        </div>
+                      </form>
                       </div>
-                      </div>
-                      </div>
+                  </div>
                       
               <div class=\"col\">
                   <div class=\"Section\">
@@ -283,9 +287,12 @@ function printInfo($film)
                               <textarea class=\"form-control\" id=\"message\" name=\"message\" placeholder=\"Escribe aquí tu opinión sobre la película. (Necesitas estar registrado)\" rows=\"7\"></textarea>
                           </div>
                           <div class=\"form-group\">
-                              <button type=\"submit\" class=\"btn btn-primary btn-block\">
-                                  Enviar crítica
+                          <form method=\"post\">
+                              <button type=\"submit\" 
+                                name = \"sendcritic\"
+                              class=\"btn btn-primary btn-block\"> Enviar crítica
                               </button>
+                              </form>
                           </div>
                       </fieldset>
                   </form>
@@ -294,8 +301,25 @@ function printInfo($film)
       </div>
   </div>
 </div>";
-  $provincia = $_POST["B"];
-  echo $provincia;
+
+
+  if (isset($_POST["estrellas"])) {
+    if (isset($_SESSION['login'])) {
+      $val =  $_POST["estrellas"];
+      $add = "insert into rating values('{$row['title']}','{$row['dropyear']}', '{$_SESSION['login']}', {$val})";
+      if (!mysqli_query($_SESSION['conn'], $add)) {
+        echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
+      } else echo '<div class="alert alert-success" role="alert">' . "Pelicula valorada " . '</div>';
+    } else  echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
+  }
+
+  if (isset($_POST['addfilm'])) {
+    if (isset($_SESSION['login'])) {
+      if (!mysqli_query($_SESSION['conn'], "insert into pelicula_usuario values ('{$row['title']}','{$row['dropYear']}', '{$_SESSION['login']}')")) {
+        echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
+      } else echo '<div class="alert alert-success" role="alert">' . "Pelicula añadida" . '</div>';
+    } else  echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
+  }
 }
 
 function cuenta_header($user)

@@ -38,56 +38,7 @@
     @header_index($_SESSION['email']);
     //echo $user.'  '.$password;
     ?>
-    <div class="containernav">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-collapse navbar-light bg-light">
-                <a class="navbar-brand" href="index.html"><img src="img/idma.png" alt="Logo" style="height:35px;" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <!--Botón que aparece cuando se hace pequeña la pagina-->
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html#cartelera">Cartelera España</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html#estrenos">Próximos estrenos</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacto.html">Contacto</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar" />
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada.html">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                    Búsqueda avanzada
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a style="padding: 0.5rem 1rem" href="clientes.html">Iniciar sesión</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a style="padding: 0.5rem 1rem" href="registro.php">Registrarse</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    </div>
     <br />
     <div class="container">
         <h1 id="cartelera">Cartelera España</h1>
