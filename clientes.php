@@ -12,64 +12,13 @@
 
 <body>
     <?php
-    if (isset($_SESSION['login'])) {
-        echo 'Hola';
-    } else echo 'Sin Session';
+    @$_SESSION['login'];
+    
     $user = null;
 
     header_index($user);
     ?>
-    <div class="containernav">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-collapse navbar-light bg-light">
-                <a class="navbar-brand" href="index.php"><img src="img/idma.png" alt="Logo" style="height:35px;" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <!--Botón que aparece cuando se hace pequeña la pagina-->
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php#cartelera">Cartelera España</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php#estrenos">Próximos estrenos</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacto.php">Contacto</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <div class="form-inline my-2 my-lg-0">
-                                <label for="search">busqueda</label>
-                                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar" />
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <div class="form-inline my-2 my-lg-0">
-                                <label for="BA">Búsqueda avanzada</label>
-                                <input id="BA" type="button" value="Búsqueda avanzada" class="btn btn-outline-success my-2 my-sm-0" />
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a style="padding: 0.5rem 1rem" href="clientes.php">Iniciar sesión</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a style="padding: 0.5rem 1rem" href="registro.php">Registrarse</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    </div>
+ 
     <br />
 
     <h1 style="margin-left: 45%;" class="card-title mb-4 mt-1">

@@ -26,7 +26,7 @@
         } else $R = 1;
 
         // nombre de usuario
-        echo "--> " . $p['user'] . '<br>';
+        // echo "--> " . $p['user'] . '<br>';
         $_SESSION['login'] = $p['user'];
     }
 
@@ -42,52 +42,13 @@
     <br />
     <div class="container">
         <h1 id="cartelera">Cartelera España</h1>
-        <div class="row">
-            <div class="col-sm">
-                <a href="pelicula.html"><img src="img/frozen.jpg" alt="Frozen 2" title="Frozen 2" class="rounded float-left index" /></a>
-            </div>
-            <div class="col-sm">
-                <form action="pelicula.php" method="get">
-                    <input  type="hidden" 
-                    name="Pelicula[nombre]" value="Frozen" />
-
-                    <input type="image"
-                            src="img/frozen.jpg"
-                            name="Pelicula[imagen]"
-                            class="rounded float-left index" alt="submit" />
-                </form>
-
-            </div>
-            <div class="col-sm">
-                <img src="img/adios.jpg" alt="Adiós" title="Adiós" class="rounded float-left index" />
-            </div>
-            <div class="col-sm">
-                <img src="img/ciudad_blanca.jpg" alt="El Silencio de la Ciudad Blanca" title="El Silencio de la Ciudad Blanca" class="rounded float-left index" />
-            </div>
+        <div class="container">
+            <?php
+            $query =  mysqli_query($_SESSION['conn'], "select * from Pelicula group by title");
+            printFimls($query);
+            ?>
         </div>
 
-        <div class="row">
-            <div class="col-sm">
-                <img src="img/joker.jpg" alt="Joker" title="Joker" class="rounded float-left index" />
-            </div>
-            <div class="col-sm">
-                <img src="img/miserables.jpg" alt="Los Miserables" title="Los Miserables" class="rounded float-left index" />
-            </div>
-            <div class="col-sm">
-                <img src="img/terminator.jpg" alt="Termiantor: Destino Oscuro" title="Terminator: Destino Oscuro" class="rounded float-left index" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <img src="img/addams.jpg" alt="La Familia Addams" title="La Familia Addams" class="rounded float-left index" />
-            </div>
-            <div class="col-sm">
-                <img src="img/intemperie.jpg" alt="Intemperie" title="Intemperie" class="rounded float-left index" />
-            </div>
-            <div class="col-sm">
-                <img src="img/guerra.jpg" alt="Hasta que dure la guerra" title="Hasta que dure la guerra" class="rounded float-left index" />
-            </div>
-        </div>
     </div>
 
     <br />
@@ -117,12 +78,7 @@
         </div>
     </div>
 
-    <div class="container">
-        <?php
-        $query =  mysqli_query($_SESSION['conn'], "select * from Pelicula group by title");
-        printFimls($query);
-        ?>
-    </div>
+
     <br>
     <footer>
         <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |

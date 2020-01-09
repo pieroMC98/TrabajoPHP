@@ -93,9 +93,9 @@ function resultado_busqueda($var)
     if ($var[$i] == null) $var[$i] = "null";
   }
 
-  $param = "select * from Pelicula where 1 and ";
+  $param = "select * from Pelicula where 1  ";
 
-  $q[0] = "title like '%{$var[0]}%' ";
+  $q[0] = "and title like '%{$var[0]}%' ";
   $q[1] = "and  actor like '{$var[1]}' ";
   $q[2] = "and director like '{$var[2]}'";
 
