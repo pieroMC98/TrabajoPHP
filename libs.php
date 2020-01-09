@@ -2,7 +2,6 @@
 require 'headers_index.php';
 ob_start();
 
-
 class Pelicula
 {
   var $nombre, $director, $length, $portada;
@@ -14,8 +13,6 @@ class Pelicula
     $this->$portada = $portada;
   }
 }
-
-
 
 session_start();
 function connectBD()
@@ -34,6 +31,7 @@ function connectBD()
 
 $_SESSION['conn'] =  connectBD();
 $conn =  connectBD();
+
 
 function header_index($user)
 {
@@ -147,11 +145,11 @@ function registro($user)
         </div>';
     exit();
   } else {
-    $param = "insert into usuario values('{$user['nick']}', '{$user['name']}', '{$user['lastName']}', '{$user['email']}','{$user['Fnac']}',false,'{$user['pass']}')";
+    $param = "insert into usuario values('{$user['nick']}', '{$user['name']}', '{$user['lastName']}', '{$user['email']}','{$user['Fnac']}',false,'{$user['pass']}', null)";
+
     if ($user['nick'] != null && $user['name'] != null && $user['lastName'] != null && $user['email'] != null && $user['Fnac'] != null && $user['pass'] != null) {
       if (mysqli_query($_SESSION['conn'], $param)) {
-        echo '<div class="alert alert-success" role="alert">' . "New record created successfully" . '</div>';
-
+        echo '<div class="alert alert-success" role="alert">' . "Nuevo usuario insertado" . '</div>';
         $_SESSION['email'] = $user['email'];
         $_SESSION['password'] = $user['pass'];
         header("Location: index.php");
@@ -327,9 +325,23 @@ function cuenta_header($user)
   $query =  mysqli_query($_SESSION['conn'], "select * from usuario where user like '{$user}'");
   // lseek pointer row. [ column ]
   $row = mysqli_fetch_array($query, 1);
+
+$nombre_fichero = "./img/user/". $_SESSION['login'] . ".jpg";
+if (file_exists($nombre_fichero)) {
+    $img_user = 'src="' . $nombre_fichero . '"';
+} else {
+    $img_user = 'src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"';
+}
+
+
+
   echo '<div class="span3 well">
       <div class="center">
-          <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" alt="aboutme" width="140" height="140" class="img-circle" /></a>
+          <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+
+          <img '. $img_user .' alt="aboutme" width="140" height="140" class="img-circle" />
+
+          </a>
           <h3>' . $row['nombre'] . ' ' . $row['apellido'] . '</h3>
           <em>Abre la imágen para saber más detalles</em>
       </div>
@@ -347,7 +359,10 @@ function cuenta_header($user)
               <div class="modal-body">
                   <div class="center">
                       <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
-                          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" alt="aboutme" width="140" height="140" class="img-circle" /></a>
+
+
+
+                          <img '. $img_user .' alt="aboutme" width="140" height="140" class="img-circle" /></a>
 
                       <h3 class="media-heading">' . $row['nombre'] . ' ' . $row['apellido'] . ' <small>España</small>
                       </h3>
