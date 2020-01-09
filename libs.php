@@ -2,6 +2,7 @@
 require 'headers_index.php';
 ob_start();
 
+
 class Pelicula
 {
   var $nombre, $director, $length, $portada;
@@ -17,7 +18,7 @@ class Pelicula
 session_start();
 function connectBD()
 {
-  $bd = "Trabajo";
+  $bd = "T2";
   $conexion =  mysqli_connect("localhost", "root", "");
   mysqli_set_charset($conexion, "utf8");
   if (mysqli_connect_errno($conexion)) {

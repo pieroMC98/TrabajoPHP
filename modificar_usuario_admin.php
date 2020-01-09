@@ -15,86 +15,6 @@
     <?php
     @header_index($_SESSION['email']);
     ?>
-    <div class="containernav">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-collapse navbar-light bg-light">
-                <a class="navbar-brand" href="index_administrador.html"><img src="img/idma.png" alt="Logo" style="height:35px;" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <!--Botón que aparece cuando se hace pequeña la pagina-->
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index_administrador.html#cartelera">Cartelera España</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="index_administrador.html#estrenos">Próximos estrenos</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacto_admin.html">Contacto</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar" />
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada_admin.html">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                    Búsqueda avanzada
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-right:7px">
-                                    Mi cuenta <span class="caret"></span>
-                                </button>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li style="margin:10px">
-                                        <a class="drop" href="cuenta_admin.html">Ir a mi cuenta</a>
-                                    </li>
-                                    <li class="dropdown-divider"></li>
-                                    <li style="margin:10px">
-                                        <a class="drop" href="modificar_usuario_admin.html">Modificar tus datos</a>
-                                    </li>
-                                    <li style="margin:10px">
-                                        <a class="drop" href="favoritos_admin.html">Ver tus favoritos</a>
-                                    </li>
-                                    <li style="margin:10px">
-                                        <a class="drop" href="criticas.html">Ver tus criticas</a>
-                                    </li>
-                                    <li class="dropdown-divider"></li>
-                                    <li style="margin:10px">
-                                        <a class="drop" href="#">Preferencias</a>
-                                    </li>
-                                    <li style="margin:10px">
-                                        <a class="drop" href="administracion.html">Opciones de administrador</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <button type="submit" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-log-out"></span> Cerrar
-                                Sesión
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    </div>
 
     <div class="container bootstrap snippet">
         <div class="row">
@@ -105,9 +25,32 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" />
-                    <h6>Cambiar foto de perfil...</h6>
-                    <input type="file" class="text-center center-block file-upload" />
+
+                    <?php
+                    $nombre_fichero = "./img/user/" . $_SESSION['login'] . ".jpg";
+                    if (file_exists($nombre_fichero)) {
+                        echo '<img src="' . $nombre_fichero . '" class="avatar img-circle img-thumbnail" alt="avatar" />';
+                    } else {
+                        echo '<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" />';
+                    }
+                    ?>
+
+
+                    <h6>Cambiar foto de perfil..</h6>
+                    <?php
+                    if (isset($_SESSION['message']) && $_SESSION['message']) {
+                        printf('<b>%s</b>', $_SESSION['message']);
+                        unset($_SESSION['message']);
+                    }
+                    ?>
+                    <form method="POST" action="upload.php" enctype="multipart/form-data">
+                        <div>
+
+                            <input type="file" name="uploadedFile" />
+                        </div>
+
+                        <input type="submit" name="uploadBtn" value="Subir" />
+                    </form>
                 </div>
                 <br />
             </div>
