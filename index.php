@@ -44,7 +44,7 @@
         <h1 id="cartelera">Cartelera España</h1>
         <div class="container">
             <?php
-            $query =  mysqli_query($_SESSION['conn'], "select * from Pelicula group by title");
+            $query =  mysqli_query($_SESSION['conn'], "select * from pelicula group by title");
             printFimls($query);
             ?>
         </div>

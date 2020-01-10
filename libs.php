@@ -18,7 +18,7 @@ class Pelicula
 session_start();
 function connectBD()
 {
-  $bd = "T2";
+  $bd = "Trabajo";
   $conexion =  mysqli_connect("localhost", "root", "");
   mysqli_set_charset($conexion, "utf8");
   if (mysqli_connect_errno($conexion)) {
@@ -92,7 +92,7 @@ function resultado_busqueda($var)
     if ($var[$i] == null) $var[$i] = "null";
   }
 
-  $param = "select * from Pelicula where 1  ";
+  $param = "select * from pelicula where 1  ";
 
   $q[0] = "and title like '%{$var[0]}%' ";
   $q[1] = "and  actor like '{$var[1]}' ";
@@ -165,7 +165,7 @@ function registro($user)
 
 function printInfo($film)
 {
-  $param = "select * from Pelicula where title like '{$film}' ";
+  $param = "select * from pelicula where title like '{$film}' ";
 
   $query =  mysqli_query($_SESSION['conn'], $param);
   $row = mysqli_fetch_array($query, 1);
