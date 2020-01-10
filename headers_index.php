@@ -41,7 +41,7 @@ function header_administracion()
         </li>
         
         <li class="nav-item">
-        <form method="get" action="resultado_busqueda_admin.php">
+        <form method="get" action="resultado_busqueda.php">
         <div class="form-inline my-2 my-lg-0">
         <label for="search"></label>
         <input
@@ -96,7 +96,7 @@ function header_administracion()
                   <li
                   style="margin:10px; color: black; background-color: rgba(240, 248, 255, 0.02);"
                   >
-                  <a class="drop" href="favoritos_admin.php"
+                  <a class="drop" href="favoritos.php"
                   >Ver tus favoritos</a
                   >
                   </li>
@@ -167,7 +167,7 @@ function header_log()
                   </li>
                   
                   <li class="nav-item">
-                  <form method="get" action="resultado_busqueda_admin.php">
+                  <form method="get" action="resultado_busqueda.php">
                   <div class="form-inline my-2 my-lg-0">
                   <label for="search"></label>
                   <input
@@ -207,7 +207,7 @@ function header_log()
                                   <a class="drop" href="modificar_usuario.php">Modificar tus datos</a>
                                   </li>
                                   <li style="margin:10px">
-                                  <a class="drop" href="favoritos_log.php">Ver tus favoritos</a>
+                                  <a class="drop" href="favoritos.php">Ver tus favoritos</a>
                               </li>
                               <li style="margin:10px">
                               <a class="drop" href="criticas.php">Ver tus criticas</a>
@@ -261,7 +261,7 @@ function header_visitor()
                     </li>
 
                     <li class="nav-item">
-                    <form method="get" action="resultado_busqueda_admin.php">
+                    <form method="get" action="resultado_busqueda.php">
                     <div class="form-inline my-2 my-lg-0">
                     <label for="search"></label>
                     <input

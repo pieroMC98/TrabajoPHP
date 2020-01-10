@@ -61,12 +61,12 @@ function printBD()
 
 function printFimls($query)
 {
-  $i = 0;
   // lseek pointer row. [ column ]
+  $i = 0;
   while ($row = mysqli_fetch_array($query, 1)) {
     $j = $i;
-    if (!($i % 3)) echo '<div class="row">';
-    echo '<div class="col-sm">';
+    if (!($i % 3)) echo '<div class="row">' . $i;
+    echo '<div class="col-sm">' . '<br>' . $j;
     echo '';
     echo "<form action=\"pelicula.php\" method=\"get\">
           <input type=\"hidden\"
@@ -80,11 +80,55 @@ function printFimls($query)
 
           </form>" .
       '</div>';
+
     if ($i == ($j + 2)) echo '</div>';
     $i++;
   }
 }
 
+function printFav($query)
+{
+  // lseek pointer row. [ column ]
+
+  $q = mysqli_query($_SESSION['conn'], $query);
+  //$_POST['delete'] = null;
+  while ($row = mysqli_fetch_array($q, 1)) {
+    echo ' <div class="container">
+    <div class="row fila">
+      <div class="col-lg-11">
+        <a
+          href="pelicula.php"
+          class="list-group-item"
+          style="height: 90px;justify-content: flex-start;"
+          ><div class="text">' . $row['title'] . '</div>
+        </a>
+        <div class="float-right borde">
+        <form method="post">
+          <button type="submit" class="btn btn-outline-danger name ="delete">
+            Eliminar
+          </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>';
+  }
+
+  echo $_POST['delete'];
+  if ( isset($_POST['delete'])) {
+    echo 'QTJ';
+    $q = mysqli_query($_SESSION['conn'], $query);
+    $row = mysqli_fetch_array($q, 1); 
+       
+    $q1 = "delete from pelicula_usuario where title like '{$row['title']}' and user like '{$_SESSION['login']}' ";
+    echo $q1;
+
+    $q2 =  mysqli_query($_SESSION['conn'], $q1);
+    if ($r = mysqli_fetch_array($q2, 1)) {
+      echo mysqli_error($r);
+    }
+  }
+}
 function resultado_busqueda($var)
 {
 
@@ -148,6 +192,7 @@ function registro($user)
   } else {
     $param = "insert into usuario values('{$user['nick']}', '{$user['name']}', '{$user['lastName']}', '{$user['email']}','{$user['Fnac']}',false,'{$user['pass']}', null)";
 
+
     if ($user['nick'] != null && $user['name'] != null && $user['lastName'] != null && $user['email'] != null && $user['Fnac'] != null && $user['pass'] != null) {
       if (mysqli_query($_SESSION['conn'], $param)) {
         echo '<div class="alert alert-success" role="alert">' . "Nuevo usuario insertado" . '</div>';
@@ -166,9 +211,31 @@ function registro($user)
 function printInfo($film)
 {
   $param = "select * from pelicula where title like '{$film}' ";
+  $reparto = "select * from trabaja where rol like 'actor' and title_film = '{$film}'";
+  $director = "select * from trabaja where rol like 'director' and title_film = '{$film}'";
 
   $query =  mysqli_query($_SESSION['conn'], $param);
+  $q =  mysqli_query($_SESSION['conn'], $reparto);
+  $qd =  mysqli_query($_SESSION['conn'], $director);
+
+  $j = null;
+  $jd = null;
+  foreach ($q as $i) {
+    $j .= $i['nombre'] . ' ' . $i['apellido_empleado'];
+    if ($i['nombre']) $j .= ', ';
+  }
+
+  $j[strlen($j) - 2] = '.';
+
+  foreach ($qd as $i) {
+    $jd .= $i['nombre'] . ' ' . $i['apellido_empleado'];
+    if ($i['nombre']) $jd .= ', ';
+  }
+
+  $jd[strlen($jd) - 2] = '.';
+
   $row = mysqli_fetch_array($query, 1);
+
   echo "<div class=\"main row\">
   <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">
       <h2>{$row['title']}</h2>
@@ -242,7 +309,7 @@ function printInfo($film)
                       </p>
                       <button class=\"btn btn-primary\" type=\"submit\" name=\"valora\">Valorar</button>
                   </form>
-                      
+                      <br>
                       <form method=\"post\">
                         <div class=\"btn-toolbar\" role=\"toolbar\">                      
                         <button type=\"submit\"  name = \"addfilm\" class=\"btn btn-warning\">
@@ -259,24 +326,26 @@ function printInfo($film)
                       <p>Año:" . $row['dropyear'] . "</p>
                       <p>Duración: " . $row['length'] . ".</p>
                       <p style=\"display:inline\">País:</p>
-                      <img src=\"img/eeuu.png\" alt=\"EEUU\" style=\"height:12px;margin: 0px 5px\" />
+                      
                       <p style=\"display:inline-block;\">" . $row['pais'] . "</p>
-                      <p>Directores: Chris Buck, Jennifer Lee</p>
-                      <p>Música:" . $row['musica'] . "</p>
-                      <p>Reparto: Animación</p>
+                      <p>Directores: " . $jd . "</p>
+                      <p>Productor: " . $row['productora'] . "</p>
+
+                      <p>Música: " . $row['musica'] . "</p>
+                      <p>Reparto: " . $j . "</p>
                       <p>
-                          Productora:" . $row['productora'] . "
+                          Productora: " . $row['productora'] . "
                       </p>
-                      <p>Género: Animación</p>
-                      <p>" . $row['sipnosis'] . "     
+                      <p>Género: " . $row['gener'] . "</p>
+                      <p>Sipnosis: " . $row['sipnosis'] . "     
                       </p>
                   </div>
               </div>
           </div>
       </div>
   </article>
-
-  <div class=\"container\">
+  
+  <div class=\"container\" style=\"margin-top:2%\">
       <div class=\"row\">
           <div class=\"col-md-12\">
               <div class=\"well well-sm\">
@@ -301,7 +370,6 @@ function printInfo($film)
   </div>
 </div>";
 
-
   if (isset($_POST["estrellas"])) {
     if (isset($_SESSION['login'])) {
       $val =  $_POST["estrellas"];
@@ -314,7 +382,7 @@ function printInfo($film)
 
   if (isset($_POST['addfilm'])) {
     if (isset($_SESSION['login'])) {
-      if (!mysqli_query($_SESSION['conn'], "insert into pelicula_usuario values ('{$row['title']}','{$row['dropYear']}', '{$_SESSION['login']}')")) {
+      if (!mysqli_query($_SESSION['conn'], "insert into pelicula_usuario values ('{$row['title']}','{$row['dropyear']}', '{$_SESSION['login']}')")) {
         echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
       } else echo '<div class="alert alert-success" role="alert">' . "Pelicula añadida" . '</div>';
     } else  echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
@@ -327,20 +395,18 @@ function cuenta_header($user)
   // lseek pointer row. [ column ]
   $row = mysqli_fetch_array($query, 1);
 
-$nombre_fichero = "./img/user/". $_SESSION['login'] . ".jpg";
-if (file_exists($nombre_fichero)) {
+  $nombre_fichero = "./img/user/" . $_SESSION['login'] . ".jpg";
+  if (file_exists($nombre_fichero)) {
     $img_user = 'src="' . $nombre_fichero . '"';
-} else {
+  } else {
     $img_user = 'src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"';
-}
-
-
+  }
 
   echo '<div class="span3 well">
       <div class="center">
           <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
 
-          <img '. $img_user .' alt="aboutme" width="140" height="140" class="img-circle" />
+          <img ' . $img_user . ' alt="aboutme" width="140" height="140" class="img-circle" />
 
           </a>
           <h3>' . $row['nombre'] . ' ' . $row['apellido'] . '</h3>
@@ -363,7 +429,7 @@ if (file_exists($nombre_fichero)) {
 
 
 
-                          <img '. $img_user .' alt="aboutme" width="140" height="140" class="img-circle" /></a>
+                          <img ' . $img_user . ' alt="aboutme" width="140" height="140" class="img-circle" /></a>
 
                       <h3 class="media-heading">' . $row['nombre'] . ' ' . $row['apellido'] . ' <small>España</small>
                       </h3>

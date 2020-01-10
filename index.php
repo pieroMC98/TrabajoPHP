@@ -77,8 +77,6 @@
             </div>
         </div>
     </div>
-
-
     <br>
     <footer>
         <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |
