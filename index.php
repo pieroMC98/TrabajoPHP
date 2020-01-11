@@ -48,7 +48,6 @@
             printFimls($query);
             ?>
         </div>
-
     </div>
 
     <br />

@@ -1,6 +1,7 @@
 <?php
 require 'headers_index.php';
 ob_start();
+session_start();
 
 
 class Pelicula
@@ -15,7 +16,6 @@ class Pelicula
   }
 }
 
-session_start();
 function connectBD()
 {
   $bd = "Trabajo";
@@ -32,7 +32,6 @@ function connectBD()
 
 $_SESSION['conn'] =  connectBD();
 $conn =  connectBD();
-
 
 function header_index($user)
 {
@@ -64,9 +63,11 @@ function printFimls($query)
   // lseek pointer row. [ column ]
   $i = 0;
   while ($row = mysqli_fetch_array($query, 1)) {
-    $j = $i;
-    if (!($i % 3)) echo '<div class="row">' . $i;
-    echo '<div class="col-sm">' . '<br>' . $j;
+    if (!($i % 3)) {
+      echo '<div class="row">';
+      $j = $i + 2;
+    }
+    echo '<div class="col-sm">' . '<br>';
     echo '';
     echo "<form action=\"pelicula.php\" method=\"get\">
           <input type=\"hidden\"
@@ -80,16 +81,15 @@ function printFimls($query)
 
           </form>" .
       '</div>';
-
-    if ($i == ($j + 2)) echo '</div>';
+    if ($i == $j) echo '</div>';
     $i++;
   }
 }
 
 function printFav($query)
 {
-  // lseek pointer row. [ column ]
 
+  // lseek pointer row. [ column ]
   $q = mysqli_query($_SESSION['conn'], $query);
   //$_POST['delete'] = null;
   while ($row = mysqli_fetch_array($q, 1)) {
@@ -103,10 +103,9 @@ function printFav($query)
           ><div class="text">' . $row['title'] . '</div>
         </a>
         <div class="float-right borde">
-        <form method="post">
-          <button type="submit" class="btn btn-outline-danger name ="delete">
-            Eliminar
-          </button>
+        <form method="post" action="libs.php">
+        <input type="text" style="visibility:hidden" value="1" name="delete"/>
+          <button type="submit" class="btn btn-outline-danger">Eliminar</button>
           </form>
         </div>
       </div>
@@ -114,21 +113,19 @@ function printFav($query)
   </div>';
   }
 
-  echo $_POST['delete'];
-  if ( isset($_POST['delete'])) {
-    echo 'QTJ';
+  if (isset($_POST['delete'])) {
     $q = mysqli_query($_SESSION['conn'], $query);
-    $row = mysqli_fetch_array($q, 1); 
-       
+    $row = mysqli_fetch_array($q, 1);
+
     $q1 = "delete from pelicula_usuario where title like '{$row['title']}' and user like '{$_SESSION['login']}' ";
-    echo $q1;
 
     $q2 =  mysqli_query($_SESSION['conn'], $q1);
-    if ($r = mysqli_fetch_array($q2, 1)) {
+    if ($r = @mysqli_fetch_array($q2, 1)) {
       echo mysqli_error($r);
     }
   }
 }
+
 function resultado_busqueda($var)
 {
 

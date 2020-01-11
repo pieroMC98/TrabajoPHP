@@ -30,11 +30,7 @@
                 </div>
             </div>
         </div>
-
-
-        <?php printFav($query);?>
-
-
+        <?php printFav($query); ?>
     </div>
     <footer>
         <a class="footer" href="aviso_legal_log.html">Aviso Legal</a> |
