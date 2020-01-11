@@ -21,8 +21,41 @@
     ?>
 
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <form class="navbar-nav mr-auto" method="post">
+                    <label class="nav-item active" for="F">Ficha<span class="sr-only">(current)</span></label>
+                    <input id="F" type="submit" name="option[]" value='0' class="nav-link" />
+
+                    <label class="nav-item active" for="F1">Criticas<span class="sr-only">(current)</span></label>
+                    <input id="F1" type="submit" name="option[]" value='1' class="nav-item active" />
+
+                    <label class="nav-item active" for="F2">Trailer<span class="sr-only">(current)</span></label>
+                    <input id="F2" type="submit" name="option[]" value='2' class="nav-item active" />
+                </form>
+            </div>
+        </nav>
         <?php
-        printInfo($film['nombre']);
+        $j = $_POST['option'];
+        foreach ($j as $key) {
+            $option = $key;
+        }
+
+        switch ($option) {
+            case 0:
+                printInfo($film['nombre']);
+                break;
+            case 1:
+                printCommnet("select * from critica inner join usuario on critica.user = usuario.user where title like 'Frozen II'");
+                break;
+            case 2:
+                echo "<div class=\"embed-responsive embed-responsive-16by9\">   
+                <iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I-oJ5QjrX9M\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>";
+                break;
+        }
         ?>
     </div>
     <footer>

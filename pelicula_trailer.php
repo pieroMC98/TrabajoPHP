@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="stylesheet" href="css/estrellas.css" />
     <?php include 'libs.php' ?>
-
 </head>
 
 <body>
-    <?php
+<?php
     $param = "select title from Pelicula where  ";
+
+
     $film = $_GET['Pelicula'];
     var_dump($_GET['Pelicula']);
 
@@ -85,11 +86,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="pelicula.html">Ficha<span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Críticas</a>
-                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="pelicula_trailer.html">Trailer</a>
+                                <a class="nav-link" href="pelicula_critica.html">Críticas</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Trailer</a>
                             </li>
                         </ul>
                     </div>
@@ -125,84 +126,13 @@
                 </div>
 
                 <br />
-            </article>
-
-            <div class="container">
-                <?php printCommnet("select * from critica where {$_SESSION['login']} and {}")?>
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" alt="Pablo" />
-                                <p class="text-secondary text-center">1 de diciembre</p>
-                            </div>
-                            <div class="col-md-10">
-                                <p>
-                                    <a class="float-left" href="cuenta.html"><strong>Pablo Pérez</strong></a>
-                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p>
-                                    Frozen II podría haber sido realizada de cualquier manera y
-                                    en cualquier tiempo que posiblemente hubiese sido un
-                                    fenómeno en taquilla, pero Disney ha querido darnos una
-                                    secuela a la altura de su predecesora que bien podría ser el
-                                    buque insignia de esta nueva generación Disney.
-                                </p>
-                                <p>
-                                    Una historia diferente, que no estira el argumento del film
-                                    original, simplemente utiliza un mensaje: el amor como
-                                    puente entre las dos películas. Si en la anterior película
-                                    nos mostraban que el amor fraternal es más poderoso que el
-                                    clásico amor romántico en esta nos dejan un mensaje más que
-                                    potente: El amor propio vale igual o incluso más que
-                                    cualquier otro.
-                                </p>
-                                <p>
-                                    El recorrido personal de Elsa continua en esta secuela, su
-                                    viaje interior hasta su propia auto realización y auto
-                                    aceptación es sin duda uno de los grandes aciertos de
-                                    Disney. Esto es algo que nos viene dando Disney desde hace
-                                    unos años con películas como Vaina (Moana) o Rompe Ralph
-                                    pero con Elsa quizás este mensaje cobre un poco más de
-                                    fuerza al ser un personaje que desde Frozen I nos muestra
-                                    sus miedos e inseguridades.
-                                </p>
-                                <p>
-                                    El papel de Anna cobra fuerza siendo ella la verdadera
-                                    protagonista en las sombras, el verdadero hilo conductor en
-                                    toda la historia, lleva el peso de la aventura y es el nexo
-                                    de unión entre los demás personajes.
-                                </p>
-                                <p>
-                                    En cuanto a Olaff pues entre broma y broma nos deja entrever
-                                    sus preocupaciones y su particular crisis existencial en
-                                    cuanto al tema de la madurez, en el cual niños y no tan
-                                    niños se sentirán identificados.
-                                </p>
-                                <br />
-                                <p>
-                                    <span style="margin-top:3px">
-                                        ¿Te ha resultado útil esta crítica?</span>
-                                    <a class="float-right btn text-white btn-danger">
-                                        <i class="fa fa-heart"></i>Me gusta</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/I-oJ5QjrX9M" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-            </div>
+            </article>
         </div>
     </div>
-    <div class="container">
-        <?php
-        printInfo($film['nombre']);
-        ?>
-    </div>
+
     <footer>
         <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |
         <a class="footer" href="aviso_legal.html#Politica_de_privacidad">Política de privacidad</a>

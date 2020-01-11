@@ -15,9 +15,7 @@
 <body>
     <?php
     @header_index($_SESSION['email']);
-
     $query = "select * from pelicula_usuario where user like '{$_SESSION['login']}' ";
-
     ?>
 
     <div class="container" style="margin:5% 5% 2% 5%; padding-bottom: 3%;">

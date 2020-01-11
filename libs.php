@@ -88,7 +88,6 @@ function printFimls($query)
 
 function printFav($query)
 {
-
   // lseek pointer row. [ column ]
   $q = mysqli_query($_SESSION['conn'], $query);
   //$_POST['delete'] = null;
@@ -103,7 +102,7 @@ function printFav($query)
           ><div class="text">' . $row['title'] . '</div>
         </a>
         <div class="float-right borde">
-        <form method="post" action="libs.php">
+        <form method="post" action="favoritos.php">
         <input type="text" style="visibility:hidden" value="1" name="delete"/>
           <button type="submit" class="btn btn-outline-danger">Eliminar</button>
           </form>
@@ -112,11 +111,9 @@ function printFav($query)
     </div>
   </div>';
   }
-
   if (isset($_POST['delete'])) {
     $q = mysqli_query($_SESSION['conn'], $query);
     $row = mysqli_fetch_array($q, 1);
-
     $q1 = "delete from pelicula_usuario where title like '{$row['title']}' and user like '{$_SESSION['login']}' ";
 
     $q2 =  mysqli_query($_SESSION['conn'], $q1);
@@ -124,6 +121,45 @@ function printFav($query)
       echo mysqli_error($r);
     }
   }
+}
+
+function printCommnet($query)
+{
+ // echo $query;
+  $query = mysqli_query($_SESSION['conn'], $query);
+  while ($row = mysqli_fetch_array($query, 1)) {
+    echo " <div class=\"card\">
+      <div class=\"card-body\">
+          <div class=\"row\">
+              <div class=\"col-md-2\">
+                  <img src=\"{$row['nombre']}\" class=\"img img-rounded img-fluid\" alt=\"{$row['nombre']}\" />
+                  <p class=\"text-secondary text-center\">1 de diciembre</p>
+              </div>
+              <div class=\"col-md-10\">
+                  <p>
+                      <a class=\"float-left\" href=\"cuenta.html\"><strong>{$row['nombre']}</strong></a>
+                      <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
+                      <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
+                      <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
+                      <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
+                  </p>
+                  <div class=\"clearfix\"></div>
+                {$row['critica']}
+                  <br />
+                  <p>
+                      <span style=\"margin-top:3px\">
+                          ¿Te ha resultado útil esta crítica?</span>
+                      <a class=\"float-right btn text-white btn-danger\">
+                          <i class=\"fa fa-heart\"></i>Me gusta</a>
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>";
+  }
+
+
+
 }
 
 function resultado_busqueda($var)
@@ -304,6 +340,18 @@ function printInfo($film)
                           <!--
   --><label for=\"radio10\">★</label>
                       </p>
+
+                      <div style=\"padding:5px;
+                      margin:5px;
+                      border-radius: 13px 13px 13px 13px;
+                      -moz-border-radius: 13px 13px 13px 13px;
+                      -webkit-border-radius: 13px 13px 13px 13px;
+                      
+                      position: absolute;
+                      margin-left: 75%;
+                      margin-top: -21%;
+                      border: solid 2px #007bff;
+                      color: black;\">Media <br> NOTA </div> 
                       <button class=\"btn btn-primary\" type=\"submit\" name=\"valora\">Valorar</button>
                   </form>
                       <br>
@@ -351,7 +399,7 @@ function printInfo($film)
                           <div class=\"form-group\">
                               <textarea class=\"form-control\" id=\"message\" name=\"message\" placeholder=\"Escribe aquí tu opinión sobre la película. (Necesitas estar registrado)\" rows=\"7\"></textarea>
                           </div>
-                          <div class=\"form-group\">
+                          <div class =\"form-group\">
                           <form method=\"post\">
                               <button type=\"submit\" 
                                 name = \"sendcritic\"
@@ -382,6 +430,15 @@ function printInfo($film)
       if (!mysqli_query($_SESSION['conn'], "insert into pelicula_usuario values ('{$row['title']}','{$row['dropyear']}', '{$_SESSION['login']}')")) {
         echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
       } else echo '<div class="alert alert-success" role="alert">' . "Pelicula añadida" . '</div>';
+    } else  echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
+  }
+
+  if (isset($_POST['message'])) {
+    if (isset($_SESSION['login'])) {
+      $query = "insert into critica values ('{$_SESSION['login']}', '{$row['title']}','{$row['dropyear']}','{$_POST['message']}')";
+      if (!mysqli_query($_SESSION['conn'], $query)) {
+        echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
+      } else echo '<div class="alert alert-success" role="alert">' . "Critica añadida" . '</div>';
     } else  echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
   }
 }
@@ -497,4 +554,23 @@ function cuenta($user)
           </a>
       </aside>
   </div>";
+}
+
+function viewCritic($user){
+  $query = mysqli_query($_SESSION['conn'],$user);
+  while($row = mysqli_fetch_row($query, 1)){
+    echo ' <div class="container">
+    <h2 class="display-5" style="color: black; margin-left: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(255, 255, 255, 0.144);">
+        Frozen
+    </h2>
+    <div style=" background-color: #d9dddf;border-radius: 21px 21px 21px 21px;
+box-shadow: 10px 13px 15px -9px rgba(0,0,0,0.94);
+ padding: 2% 2% 2% 2%;color: black;">
+      '.$row['critic'].'
+        <button style="margin-bottom: 2%; margin-left: 45%;" type="button" class="btn btn-outline-danger">
+            Eliminar
+        </button>
+    </div>
+</div>';
+  }
 }
