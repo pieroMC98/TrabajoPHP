@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-01-2020 a las 18:03:14
+-- Tiempo de generación: 11-01-2020 a las 17:42:57
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `Trabajo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `critica`
+--
+
+CREATE TABLE `critica` (
+  `user` char(30) NOT NULL,
+  `title` varchar(21) NOT NULL,
+  `dropyear` varchar(10) NOT NULL,
+  `critica` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `critica`
+--
+
+INSERT INTO `critica` (`user`, `title`, `dropyear`, `critica`) VALUES
+('PMC', 'Frozen II', '2019-08-21', 'add comment');
 
 -- --------------------------------------------------------
 
@@ -106,17 +126,30 @@ INSERT INTO `pelicula` (`title`, `gener`, `dropyear`, `length`, `sipnosis`, `src
 --
 
 CREATE TABLE `pelicula_usuario` (
-  `title` varchar(9) NOT NULL,
+  `title` varchar(25) NOT NULL,
   `dropYear` varchar(10) NOT NULL,
-  `user` varchar(3) NOT NULL
+  `user` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `pelicula_usuario`
+-- Estructura de tabla para la tabla `rating`
 --
 
-INSERT INTO `pelicula_usuario` (`title`, `dropYear`, `user`) VALUES
-('Frozen II', '2019-08-21', 'PMC');
+CREATE TABLE `rating` (
+  `title` char(30) NOT NULL,
+  `dropYear` date NOT NULL,
+  `user` char(20) NOT NULL,
+  `rate` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `rating`
+--
+
+INSERT INTO `rating` (`title`, `dropYear`, `user`, `rate`) VALUES
+('Frozen II', '2019-08-21', 'PMC', 6);
 
 -- --------------------------------------------------------
 
@@ -202,6 +235,12 @@ INSERT INTO `usuario` (`user`, `nombre`, `apellido`, `email`, `Fnac`, `admin`, `
 --
 
 --
+-- Indices de la tabla `critica`
+--
+ALTER TABLE `critica`
+  ADD PRIMARY KEY (`user`,`title`,`dropyear`);
+
+--
 -- Indices de la tabla `empleado`
 --
 ALTER TABLE `empleado`
@@ -217,6 +256,12 @@ ALTER TABLE `pelicula`
 -- Indices de la tabla `pelicula_usuario`
 --
 ALTER TABLE `pelicula_usuario`
+  ADD PRIMARY KEY (`title`,`dropYear`,`user`);
+
+--
+-- Indices de la tabla `rating`
+--
+ALTER TABLE `rating`
   ADD PRIMARY KEY (`title`,`dropYear`,`user`);
 
 --

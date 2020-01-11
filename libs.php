@@ -84,6 +84,7 @@ function printFimls($query)
     if ($i == $j) echo '</div>';
     $i++;
   }
+  if (($i % 3)) echo '</div>';
 }
 
 function printFav($query)
@@ -125,7 +126,7 @@ function printFav($query)
 
 function printCommnet($query)
 {
- // echo $query;
+  // echo $query;
   $query = mysqli_query($_SESSION['conn'], $query);
   while ($row = mysqli_fetch_array($query, 1)) {
     echo " <div class=\"card\">
@@ -157,9 +158,6 @@ function printCommnet($query)
       </div>
   </div>";
   }
-
-
-
 }
 
 function resultado_busqueda($var)
@@ -250,7 +248,8 @@ function printInfo($film)
   $query =  mysqli_query($_SESSION['conn'], $param);
   $q =  mysqli_query($_SESSION['conn'], $reparto);
   $qd =  mysqli_query($_SESSION['conn'], $director);
-
+  $avg =  mysqli_query($_SESSION['conn'], "select avg(rate), count(title) from rating where title like '{$film}'");
+  $avgR = mysqli_fetch_row($avg);
   $j = null;
   $jd = null;
   foreach ($q as $i) {
@@ -351,7 +350,7 @@ function printInfo($film)
                       margin-left: 75%;
                       margin-top: -21%;
                       border: solid 2px #007bff;
-                      color: black;\">Media <br> NOTA </div> 
+                      color: black;\">Media <br> {$avgR[0]} / {$avgR[1]} votos</div> 
                       <button class=\"btn btn-primary\" type=\"submit\" name=\"valora\">Valorar</button>
                   </form>
                       <br>
@@ -556,21 +555,34 @@ function cuenta($user)
   </div>";
 }
 
-function viewCritic($user){
-  $query = mysqli_query($_SESSION['conn'],$user);
-  while($row = mysqli_fetch_row($query, 1)){
+function viewCritic($user)
+{
+  $query = mysqli_query($_SESSION['conn'], $user);
+  while ($row = mysqli_fetch_array($query, 1)) {
     echo ' <div class="container">
     <h2 class="display-5" style="color: black; margin-left: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(255, 255, 255, 0.144);">
-        Frozen
-    </h2>
-    <div style=" background-color: #d9dddf;border-radius: 21px 21px 21px 21px;
+    ' . $row['title'] . '
+    </h2><div style=" background-color: #d9dddf;border-radius: 21px 21px 21px 21px;
 box-shadow: 10px 13px 15px -9px rgba(0,0,0,0.94);
  padding: 2% 2% 2% 2%;color: black;">
-      '.$row['critic'].'
-        <button style="margin-bottom: 2%; margin-left: 45%;" type="button" class="btn btn-outline-danger">
+      ' . $row['critica'] . '
+      <form method="post">
+      <input type="text" style="visibility:hidden" value="1" name="delete"/>
+        <button style="margin-bottom: 2%; margin-left: 45%;" type="submit" class="btn btn-outline-danger">
             Eliminar
         </button>
+        </form>
     </div>
 </div>';
+  }
+
+  if (isset($_POST['delete'])) {
+    $q = mysqli_query($_SESSION['conn'], $user);
+    $row = mysqli_fetch_array($q, 1);
+    $q1 = "delete from critica where critica like '{$row['critica']}' and user like '{$_SESSION['login']}' ";
+    $q2 =  mysqli_query($_SESSION['conn'], $q1);
+    if ($r = @mysqli_fetch_array($q2, 1)) {
+      echo mysqli_error($r);
+    }
   }
 }

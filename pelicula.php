@@ -39,9 +39,12 @@
             </div>
         </nav>
         <?php
-        $j = $_POST['option'];
-        foreach ($j as $key) {
-            $option = $key;
+        $option = 0;
+        $j = @$_POST['option'];
+        if (isset($j)) {
+            foreach ($j as $key) {
+                $option = $key;
+            }
         }
 
         switch ($option) {
@@ -49,11 +52,16 @@
                 printInfo($film['nombre']);
                 break;
             case 1:
-                printCommnet("select * from critica inner join usuario on critica.user = usuario.user where title like 'Frozen II'");
+                printCommnet("select * from critica inner join usuario on critica.user = usuario.user where title like '{$film['nombre']}'");
                 break;
             case 2:
-                echo "<div class=\"embed-responsive embed-responsive-16by9\">   
-                <iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/I-oJ5QjrX9M\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>";
+
+                $row = mysqli_fetch_array(mysqli_query($_SESSION['conn'], "select * from pelicula where title like '{$film['nombre']}'"), 1);
+                $ytf = "https://www.youtube.com/embed/";
+                $src = str_replace('https://www.youtube.com/watch?v=', '', $row['YT']);
+                $ytf .= $src;
+                echo "<br><div class=\"embed-responsive embed-responsive-16by9\">   
+                <iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"{$ytf}\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>";
                 break;
         }
         ?>

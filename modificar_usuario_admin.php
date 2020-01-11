@@ -92,6 +92,14 @@
                                     <input style="margin-top:5px " type="password" class="form-control" name="passR" id="password2" placeholder="Repite tu contraseña" title="Repite la contraseña." />
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="password">Cambiar Fecha nacimento</label>
+                                    <input type="date" class="form-control" name="Fnac" id="password" placeholder="Contraseña" title="nueva fecha" />
+
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <br />
