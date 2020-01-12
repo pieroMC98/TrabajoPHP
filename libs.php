@@ -25,12 +25,14 @@ $conn =  connectBD();
 
 function header_index($user)
 {
-  $query = mysqli_query($_SESSION['conn'], "select admin from usuario where admin = true");
+  $query = mysqli_query($_SESSION['conn'], "select admin from usuario where email = '{$user}'");
   $row = mysqli_fetch_array($query, 1);
+
   if ($user != null) {
-    if ($row['admin']) {
+    if ($row['admin'])
       header_administracion();
-    } else   header_log();
+    else
+      header_log();
   } else header_visitor();
 }
 
@@ -128,7 +130,7 @@ function printCommnet($query)
               </div>
               <div class=\"col-md-10\">
                   <p>
-                      <a class=\"float-left\" href=\"cuenta.html\"><strong>{$row['nombre']}</strong></a>
+                      <a class=\"float-left\" href=\"cuenta.php\"><strong>{$row['nombre']}</strong></a>
                       <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
                       <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
                       <span class=\"float-right\"><i class=\"text-warning fa fa-star\"></i></span>
@@ -153,12 +155,17 @@ function printCommnet($query)
 function resultado_busqueda($var)
 {
 
-  if ($var[3] == 0)  $param = "select * from pelicula where 1 ";
-  else $param = "SELECT *,AVG(rate) as R FROM rating inner join pelicula on rating.title = pelicula.title where 1 ";
-
-  $q[0] = "and rating.title like '%{$var[0]}%' ";
-  $q[1] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[1]}%'  and rol like 'actor' )  ";
-  $q[2] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
+  if ($var[3] == 0) {
+    $param = "select * from pelicula where 1 ";
+    $q[0] = "and title like '%{$var[0]}%' ";
+    $q[1] = "and  title like ( select title_film from trabaja where apodo like '%{$var[1]}%'  and rol like 'actor' )  ";
+    $q[2] = "and  title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
+  } else {
+    $param = "SELECT *,AVG(rate) as R FROM rating inner join pelicula on rating.title = pelicula.title where 1 ";
+    $q[0] = "and rating.title like '%{$var[0]}%' ";
+    $q[1] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[1]}%'  and rol like 'actor' )  ";
+    $q[2] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
+  }
 
   if ($var[3] == 2)
     $q[3] = "and rating.user = '{$_SESSION['login']}'";
@@ -498,6 +505,7 @@ function cuenta($user)
   $query =  mysqli_query($_SESSION['conn'], "select * from usuario where user like '{$user}'");
   // lseek pointer row. [ column ]
   $row = mysqli_fetch_array($query, 1);
+  if ($row['admin']) $admin = "<input type=\"button\" class=\"btn btn-success\" value=\"Opciones de administrador\" onclick=\"location.href = 'administracion.html';\" />";
   echo " <div class=\"main row\">
       <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">
           <h1>Bienvenido a tu cuenta</h1>
@@ -516,7 +524,7 @@ function cuenta($user)
               </tr>
           </table>
 
-          <input type=\"button\" class=\"btn btn-success\" value=\"Opciones de administrador\" onclick=\"location.href = 'administracion.html';\" />
+          " . $admin . "
       </article>
 
       <aside class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">

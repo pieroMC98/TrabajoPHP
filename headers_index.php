@@ -140,7 +140,7 @@ function header_log()
     echo '<div class="containernav">
             <header>
             <nav class="navbar navbar-expand-lg navbar-collapse navbar-light bg-light">
-            <a class="navbar-brand" href="index_logeado.php"><img src="img/idma.png" alt="Logo" style="height:35px;" /></a>
+            <a class="navbar-brand" href="index.php"><img src="img/idma.png" alt="Logo" style="height:35px;" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <!--Botón que aparece cuando se hace pequeña la pagina-->
             <span class="navbar-toggler-icon"></span>
@@ -149,15 +149,15 @@ function header_log()
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link" href="index_logeado.php">Cartelera España</a>
+            <a class="nav-link" href="index.php">Cartelera España</a>
             </li>
             
             <li class="nav-item">
-            <a class="nav-link" href="index_logeado.php">Próximos estrenos</a>
+            <a class="nav-link" href="index.php">Próximos estrenos</a>
             </li>
             
                   <li class="nav-item">
-                  <a class="nav-link" href="contacto_log.php">Contacto</a>
+                  <a class="nav-link" href="contacto.php">Contacto</a>
                   </li>
                   
                   <li class="nav-item">
