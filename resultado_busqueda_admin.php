@@ -18,7 +18,6 @@
     @$var[] = $_GET['actor'];
     @$var[] = $_GET['director'];
     @$var[] = $_GET['order'];
-    echo $_GET['order'];
     $conexion = connectBD();
     ?>
     <br />

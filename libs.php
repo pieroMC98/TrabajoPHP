@@ -152,15 +152,31 @@ function printCommnet($query)
 
 function resultado_busqueda($var)
 {
-  $param = "select * from pelicula where 1  ";
+  $param = "select * from pelicula inner join trabaja on trabaja.title_film = pelicula.title where 1 ";
 
   $q[0] = "and title like '%{$var[0]}%' ";
-  $q[1] = "and  actor like '{$var[1]}' ";
-  $q[2] = "and director like '{$var[2]}'";
+  $q[1] = "and  (nombre like '{$var[1]}' and rol = 'actor') ";
+  $q[2] = "and (nombre like '{$var[2]}' and rol = 'director')";
 
   for ($i = 0; $i < count($var); $i++)
     if (strcmp($var[$i], null)) $param .= $q[$i];
-  $param .= " group by title";
+
+  switch ($var[3]) {
+    case 1:
+      $param .= " order by ";
+      break;
+
+    case 2:
+      $param .= " order by ";
+      break;
+
+    case 3:
+      $param .= " order by ";
+      break;
+    default:
+      $param .= " group by title";
+      break;
+  }
 
   $query =  mysqli_query($_SESSION['conn'], $param);
   printFimls($query);
@@ -189,7 +205,7 @@ function registro_update($user)
 
     $q[strlen($q) - 1] = ' ';
     $q .= " where user like '{$_SESSION['login']}'";
-    echo $q . '<br>';
+
 
     if (mysqli_query($_SESSION['conn'], $q)) {
       echo '<div class="alert alert-success" role="alert">' . "usuario modificado " . '</div>';
