@@ -16,7 +16,6 @@
     <?php
     $param = "select title from Pelicula where  ";
     $film = $_GET['Pelicula'];
-
     @header_index($_SESSION['email']);
     ?>
 
@@ -55,7 +54,6 @@
                 printCommnet("select * from critica inner join usuario on critica.user = usuario.user where title like '{$film['nombre']}'");
                 break;
             case 2:
-
                 $row = mysqli_fetch_array(mysqli_query($_SESSION['conn'], "select * from pelicula where title like '{$film['nombre']}'"), 1);
                 $ytf = "https://www.youtube.com/embed/";
                 $src = str_replace('https://www.youtube.com/watch?v=', '', $row['YT']);

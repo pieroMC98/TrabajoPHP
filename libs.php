@@ -1,20 +1,10 @@
 <?php
 require 'headers_index.php';
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+//session_cache_limiter('public'); // works too
 ob_start();
 session_start();
-
-
-class Pelicula
-{
-  var $nombre, $director, $length, $portada;
-  function Pelicula($nombre, $director, $length,  $portada)
-  {
-    $this->$nombre = $nombre;
-    $this->$director = $director;
-    $this->length = $length;
-    $this->$portada = $portada;
-  }
-}
 
 function connectBD()
 {
@@ -162,11 +152,6 @@ function printCommnet($query)
 
 function resultado_busqueda($var)
 {
-
-  for ($i = 0; $i < count($var); $i++) {
-    if ($var[$i] == null) $var[$i] = "null";
-  }
-
   $param = "select * from pelicula where 1  ";
 
   $q[0] = "and title like '%{$var[0]}%' ";
@@ -174,7 +159,7 @@ function resultado_busqueda($var)
   $q[2] = "and director like '{$var[2]}'";
 
   for ($i = 0; $i < count($var); $i++)
-    if (strcmp($var[$i], "null")) $param .= $q[$i];
+    if (strcmp($var[$i], null)) $param .= $q[$i];
   $param .= " group by title";
 
   $query =  mysqli_query($_SESSION['conn'], $param);
@@ -183,32 +168,37 @@ function resultado_busqueda($var)
 
 function registro_update($user)
 {
-
-  if (strcmp($user['pass'], $user['passR'])) {
+  if (strcmp(@$user[4], @$user[5]) || !strcmp(@$user[4], null)) {
     echo '<div class="alert alert-warning" role="alert">
     passwords don\'t coincide
         </div>';
     exit();
   } else {
-    $param = "update usuario set user = '{$user['nick']}',
-                                 nombre =  '{$user['name']}', 
-                                 apellido = '{$user['lastName']}',
-                                 email = '{$user['email']}',
-                                 Fnac = '{$user['Fnac']}',false,
-                                 password = '{$user['pass']}')";
+    $q = "update usuario set ";
+    $set[3] = "user = '{$user[3]}' ,";
+    $set[0] = " nombre =  '{$user[0]}',";
+    $set[1] = " apellido = '{$user[1]}',";
+    $set[2] = " email = '{$user[2]}',";
+    $set[6] = " Fnac = '{$user[6]}',";
+    $set[4] = " password = '{$user[4]}',";
 
 
-    if ($user['nick'] != null && $user['name'] != null && $user['lastName'] != null && $user['email'] != null && $user['Fnac'] != null && $user['pass'] != null) {
-      if (mysqli_query($_SESSION['conn'], $param)) {
-        echo "New record created successfully";
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['password'] = $user['pass'];
-        header("Location: index.php");
-      } else {
-        echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
-      }
+    for ($i = 0; $i < count($user); $i++) {
+      if (strcmp($user[$i], null)) $q .= @$set[$i];
+    }
+
+    $q[strlen($q) - 1] = ' ';
+    $q .= " where user like '{$_SESSION['login']}'";
+    echo $q . '<br>';
+
+    if (mysqli_query($_SESSION['conn'], $q)) {
+      echo '<div class="alert alert-success" role="alert">' . "usuario modificado " . '</div>';
+      $_SESSION['email'] = $user['email'];
+      $_SESSION['password'] = $user['pass'];
+      $_SESSION['login'] = $user['nick'];
+      header("Location: index.php");
     } else {
-      echo '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios</div>';
+      echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
     }
   }
 }
@@ -479,11 +469,7 @@ function cuenta_header($user)
               <div class="modal-body">
                   <div class="center">
                       <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
-
-
-
                           <img ' . $img_user . ' alt="aboutme" width="140" height="140" class="img-circle" /></a>
-
                       <h3 class="media-heading">' . $row['nombre'] . ' ' . $row['apellido'] . ' <small>España</small>
                       </h3>
  

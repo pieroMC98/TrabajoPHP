@@ -17,35 +17,14 @@
     $var[] = $_GET['title'];
     @$var[] = $_GET['actor'];
     @$var[] = $_GET['director'];
-    @$var[] = $_GET['containt'];
-
-    $c = $var[3];
-    $i = 0;
-    $token = strtok($c, " ");
-    while ($token != null) {
-        $a[$i++] =  $token;
-        $token = strtok(" ");
-    }
-
-    for ($i = 0; $i < count(@$a); $i++) {
-        $var[3][$i] = $a[$i];
-        echo $var[3][$i] . '<br>';
-    }
-
+    @$var[] = $_GET['order'];
+    echo $_GET['order'];
     $conexion = connectBD();
     ?>
     <br />
     <h1 id="cartelera">Resultado de la búsqueda:</h1>
     <div class="container">
         <?php resultado_busqueda($var, $conexion) ?>
-        <!-- <div class="row">
-            <div class="col-sm">
-                <a href="pelicula.html"><img src="img/frozen.jpg" alt="Frozen 2" title="Frozen 2" class="rounded float-left index" /></a>
-            </div>
-        </div>
-
-        <div class="row"></div>
-        <div class="row"></div> -->
     </div>
 
     <footer>

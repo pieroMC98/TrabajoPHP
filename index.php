@@ -13,30 +13,7 @@
 
 <body>
     <?php
-    ob_start();
-    $R = 0;
-    if (isset($_POST['email']) && isset($_POST['password'])) {
-
-        $q = "Select user from usuario where email like '{$_POST['email']}' and PASSWORD = '{$_POST['password']}'";
-        $query = mysqli_query($conn, $q);
-        $p = mysqli_fetch_array($query, 1);
-        if ($p) {
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['password'] = $_POST['password'];
-        } else $R = 1;
-
-        // nombre de usuario
-        // echo "--> " . $p['user'] . '<br>';
-        $_SESSION['login'] = $p['user'];
-    }
-
-    if ($R == 1) {
-        echo 'Me redirige';
-        header("Location: clientes.php");
-    }
-
     @header_index($_SESSION['email']);
-    //echo $user.'  '.$password;
     ?>
 
     <br />

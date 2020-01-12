@@ -1,3 +1,88 @@
+DAW1 - iMDMA
+Ayer
+sáb. 22:54
+S
+SERGIO VICENTE SAN GREGORIO ha subido un elemento
+HTML
+administracion.php
+sáb. 20:28
+P
+Has subido un elemento
+Archivo desconocido
+Trabajo.sql
+sáb. 17:44
+P
+Has subido un elemento
+Archivo desconocido
+trabajo.sql
+Anteriormente esta semana
+vie. 19:35
+S
+SERGIO VICENTE SAN GREGORIO ha subido un elemento
+HTML
+favoritos_admin.html
+vie. 17:46
+P
+Has subido un elemento
+Archivo comprimido
+HTML-PHP.zip
+La semana pasada
+3 ene.
+P
+Has subido un elemento
+Archivo comprimido
+iMDMA-BLOQUE1-PHP.zip
+30 dic. 2019
+S
+SERGIO VICENTE SAN GREGORIO ha subido 2 elementos
+SQL
+imdma.sql
+Archivo comprimido
+Bloque1-Grupo1.zip
+El mes pasado
+26 dic. 2019
+S
+SERGIO VICENTE SAN GREGORIO ha subido un elemento
+Archivo comprimido
+iMDMA-BLOQUE1.zip
+26 dic. 2019
+S
+SERGIO VICENTE SAN GREGORIOha movido 238 elementos a la papelera
+JavaScript
+debounce.js
+JavaScript
+getClientRect.js
+JavaScript
+clockwise.js
+JavaScript
+getBoundaries.js
+JavaScript
+find.js
+JavaScript
+getBoundaries.padding.js
+RESTAURAR
+26 dic. 2019
+S
+SERGIO VICENTE SAN GREGORIO ha creado un elemento en
+DAW1 - iMDMA
+Carpeta de Google Drive
+SIN ACCESIBILIDAD
+26 dic. 2019
+S
+SERGIO VICENTE SAN GREGORIOha movido 65 elementos a la papelera
+Carpeta de Google Drive
+images
+Imagen
+favicon-16x16.png
+Carpeta de Google Drive
+js
+Archivo binario
+CNAME
+Archivo desconocido
+feed.xml
+Carpeta de Google Drive
+_sass
+RESTAURAR
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,19 +98,12 @@
 
 <body>
   <?php
-  if (isset($_SESSION['login'])) {
-    echo 'Hola';
-  } else echo 'Sin Session';
-
-  header_index($_SESSION['email']);
+  @header_index($_SESSION['email']);
   ?>
   <div style="background-color: white;color: black;" class="container">
-    <h1 class="display-1" style="color: black; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(240, 248, 255, 0.034);">
-      ADMINISTRACIÓN
-    </h1>
 
     <article>
-      <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(240, 248, 255, 0.034);">
+      <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(240, 248, 255, 0.034); font-size: 34px">
         Administración de usuarios
       </h2>
       <h3 class="display-5" style="color: black; margin-left: 5%; margin-top: 3%;background-color: rgba(240, 248, 255, 0.034);">
@@ -36,11 +114,25 @@
         del sistema.
       </p>
       <div style="margin-left: 3%" class="col-md-10">
-        <label for="fname1">Nombre usuario</label>
-        <input id="fname1" name="fname1" type="text" placeholder="Nombre de usuario" class="form-control" />
-        <button style="margin-top: 2%; margin-left: 45%;" type="button" class="btn btn-danger">
-          Eliminar
-        </button>
+        <form method="post">
+          <input id="fname1" name="fname1" type="text" placeholder="Nombre de usuario" class="form-control" />
+          <button style="margin-top: 2%; margin-left: 45%;" type="submit" class="btn btn-danger">
+            Eliminar
+          </button>
+        </form>
+        <?php
+
+        if (isset($_POST['fname1'])) {
+
+          $var = $_POST['fname1'];
+          $existe = "select count(*) from usuario WHERE user = '{$var}' and admin = 0";
+          $q1 =  mysqli_query($_SESSION['conn'], $existe);
+
+          $delete = "delete from `usuario` WHERE user = '{$var}' and admin = 0";
+          $query =  mysqli_query($_SESSION['conn'], $delete);
+        }
+
+        ?>
       </div>
     </article>
 
@@ -53,20 +145,54 @@
         quiera.
       </p>
       <div style="margin-left: 3%;" class="col-md-10">
-        <label for="fname2">Nombre usuario</label>
-        <input id="fname2" name="fname2" type="text" placeholder="Nombre de usuario" class="form-control" />
-        <button style="margin-top: 2%;" type="button" class="btn btn-primary btn-lg">
-          Dar permisos de administrador
-        </button>
-        <button style="margin-top: 2%;" type="button" class="btn btn-secondary btn-lg">
-          Eliminar permisos de administrador
-        </button>
+        <form method="post">
+          <input id="fname2" name="fname2" type="text" placeholder="Nombre de usuario" class="form-control" />
+          <button style="margin-top: 2%;" type="sumbit" name="b1" class="btn btn-primary btn-lg">
+            Dar permisos de administrador
+          </button>
+
+          <?php
+
+          if (isset($_POST['fname2']) && isset($_POST['b1'])) {
+
+            $var2 = $_POST['fname2'];
+
+            $permisos = "UPDATE usuario SET admin= '1' WHERE admin = '0' and user like '{$var2}' ";
+            if (mysqli_query($_SESSION['conn'], $permisos)) {
+
+              echo '<div class="alert alert-success" role="alert">' . $var2 . ' ahora es administrador.</div>';;
+            } else {
+              echo '<div class="alert alert-danger" role="alert">' . $var2 . ' ya era administrador.</div>';
+            }
+          }
+          ?>
+          <button style="margin-top: 2%;" type="submit" name="b2" class="btn btn-secondary btn-lg">
+            Eliminar permisos de administrador
+          </button>
+
+          <?php
+
+          if (isset($_POST['fname2']) && isset($_POST['b2'])) {
+
+            $var2 = $_POST['fname2'];
+
+            $quitarpermisos = "UPDATE usuario SET admin= '0' WHERE admin = '1' and user like '{$var2}' ";
+
+            if (mysqli_query($_SESSION['conn'], $quitarpermisos)) {
+
+              echo '<div class="alert alert-success" role="alert">' . $var2 . ' ha dejado de ser administrador.</div>';
+            } else {
+              echo '<div class="alert alert-danger" role="alert">' . $var2 . ' no era administrador.</div>';
+            }
+          }
+          ?>
+        </form>
       </div>
     </article>
 
     <article>
-      <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%;;background-color: rgba(240, 248, 255, 0.034);">
-        Administracion de peliculas
+      <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%;;background-color: rgba(240, 248, 255, 0.034); font-size: 34px">
+        Administración de películas
       </h2>
     </article>
     <h3 class="display-5" style="margin-left: 5%;margin-top: 3%;;background-color: rgba(240, 248, 255, 0.034);color: black;">
@@ -77,21 +203,43 @@
     </p>
 
     <div style="margin-left: 3%; margin-bottom: 3%;" class="col-md-10">
-      <label for="fname3">Nombre de la pelicula</label>
-      <input id="fname3" name="fname3" type="text" placeholder="Nombre de la pelicula." class="form-control" />
 
-      <label for="fname4">Id pelicula</label>
-      <input style="margin-top: 3%;" id="fname4" name="fname4" type="text" placeholder="Id pelicula." class="form-control" />
+      <form method="post">
+        <input id="fname3" name="fname3" type="text" placeholder="Nombre de la pelicula." class="form-control" />
 
-      <textarea style="margin-top: 3%;" placeholder="Descripcion de la pelicula." class="form-control" rows="4"></textarea>
 
-      <label for="file-input">file</label>
-      <input style="margin-top: 3%;" name="file-input" id="file-input" type="file" />
-      <br />
+        <input style="margin-top: 3%;" id="fname4" name="fname4" type="text" placeholder="Año de publicación." class="form-control" />
 
-      <button style="margin: 3% 45%; " type="button" class="btn btn-success">
-        Añadir
-      </button>
+        <input style="margin-top: 3%;" id="fname5" name="fname5" type="text" placeholder="País." class="form-control" />
+
+        <input style="margin-top: 3%;" id="fname6" name="fname6" type="text" placeholder="Género." class="form-control" />
+
+        <textarea style="margin-top: 3%;" name="fname7" placeholder="Sinopsis de la pelicula." class="form-control" rows="4"></textarea>
+
+        <label for="file-input">file</label>
+        <input style="margin-top: 3%;" name="file-input" id="file-input" type="file" />
+        <br />
+
+        <button style="margin: 3% 45%; " type="sumbit" class="btn btn-success">
+          Añadir
+        </button>
+      </form>
+
+      <?php
+
+      if (isset($_POST['fname3'], $_POST['fname4'], $_POST['fname5'], $_POST['fname6'], $_POST['fname7'])) {
+
+        $nombre = $_POST['fname3'];
+        $year = $_POST['fname4'];
+        $genero = $_POST['fname5'];
+        $sinopsis = $_POST['fname6'];
+
+
+        $anadir = "insert into pelicula(title, gener, dropyear, sipnosis) VALUES ('{$nombre}','{$genero}','{$year}','{$sinopsis}');";
+        $query =  mysqli_query($_SESSION['conn'], $anadir);
+      }
+
+      ?>
     </div>
 
     <div style="padding-bottom: 3%;" class="col-md-10">
@@ -99,14 +247,26 @@
         Eliminar película
       </h3>
       <p style="margin-left: 5%; font-size: 90%">
-        Introduca el nombre o el ID de la pelicula que desea elmininar.
+        Introduca el nombre de la pelicula que desea elmininar.
       </p>
 
-      <label for="fname">ID/Nombre pelicula</label>
-      <input style="margin-left: 5%; ;" id="fname" name="fname" type="text" placeholder="ID/Nombre pelicula." class="form-control" />
-      <button style="margin-top: 2%; margin-left: 45%;" type="button" class="btn btn-danger">
-        Eliminar
-      </button>
+      <form method="post">
+        <input style="margin-left: 5%; ;" id="fname" name="fname" type="text" placeholder="Nombre pelicula." class="form-control" />
+        <button style="margin-top: 2%; margin-left: 45%;" type="button" class="btn btn-danger">
+          Eliminar
+        </button>
+      </form>
+      <?php
+
+      if (isset($_POST['fname'])) {
+
+        $var1 = $_POST['fname'];
+
+        $delete_peli = "delete from `pelicula` WHERE title = '{$var1}'";
+        $query =  mysqli_query($_SESSION['conn'], $delete_peli);
+      }
+
+      ?>
     </div>
   </div>
 
@@ -136,4 +296,8 @@
   <script src="js/jquery-3.4.1.min.js">
     // Jquery libraries
   </script>
-  <script src=js/popper.min.js> </script> <script src=js/bootstrap.min.js> </script> </body> </html>
+  <script src="js/popper.min.js"> </script>
+  <script src="js/bootstrap.min.js"> </script>
+</body>
+
+</html>

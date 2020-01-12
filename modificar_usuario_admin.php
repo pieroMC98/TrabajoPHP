@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="first_name">Apellido</label>
-                                    <input type="text" class="form-control" name="name" id="lastName" placeholder="Nombre real" title="Introduce tu nombre real." />
+                                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Nombre real" title="Introduce tu nombre real." />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -95,8 +95,8 @@
 
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="password">Cambiar Fecha nacimento</label>
-                                    <input type="date" class="form-control" name="Fnac" id="password" placeholder="Contraseña" title="nueva fecha" />
+                                    <label for="Fnac">Cambiar Fecha nacimento</label>
+                                    <input type="date" class="form-control" name="Fnac" id="Fnac" placeholder="Contraseña" title="nueva fecha" />
 
                                 </div>
                             </div>
@@ -110,13 +110,13 @@
                             </div>
                         </form>
                         <?php
-                        @$user['name'] = htmlspecialchars($_POST['name']);
-                        @$user['lastName'] = htmlspecialchars($_POST['lastName']);
-                        @$user['email'] = htmlspecialchars($_POST['correo']);
-                        @$user['nick'] = htmlspecialchars($_POST['nick']);
-                        @$user['pass'] = htmlspecialchars($_POST['pass']);
-                        @$user['passR'] = htmlspecialchars($_POST['passR']);
-                        @$user['Fnac'] = htmlspecialchars($_POST['Fnac']);
+                        @$user[] = htmlspecialchars($_POST['name']);
+                        @$user[] = htmlspecialchars($_POST['lastName']);
+                        @$user[] = htmlspecialchars($_POST['correo']);
+                        @$user[] = htmlspecialchars($_POST['nick']);
+                        @$user[] = htmlspecialchars($_POST['pass']);
+                        @$user[] = htmlspecialchars($_POST['passR']);
+                        @$user[] = $_POST['Fnac'];
                         registro_update($user);
                         ?>
                         <hr />
@@ -152,8 +152,8 @@
         </p>
     </footer>
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"> </script>
+    <script src="js/bootstrap.min.js"> </script>
 </body>
 
 </html>

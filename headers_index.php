@@ -41,7 +41,7 @@ function header_administracion()
         </li>
         
         <li class="nav-item">
-        <form method="get" action="resultado_busqueda.php">
+        <form method="get" action="resultado_busqueda_admin.php">
         <div class="form-inline my-2 my-lg-0">
         <label for="search"></label>
         <input
@@ -59,7 +59,7 @@ function header_administracion()
         <li class="nav-item">
         <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada.php">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                Búsqueda Aavanzada
+                Búsqueda avanzada
             </button>
         </form>
     </li>
@@ -167,7 +167,7 @@ function header_log()
                   </li>
                   
                   <li class="nav-item">
-                  <form method="get" action="resultado_busqueda.php">
+                  <form method="get" action="resultado_busqueda_admin.php">
                   <div class="form-inline my-2 my-lg-0">
                   <label for="search"></label>
                   <input
@@ -185,7 +185,7 @@ function header_log()
                   <li class="nav-item">
                   <form class="form-inline my-2 my-lg-0" action="busqueda_avanzada.php">
                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                          Búsqueda Aavanzada
+                          Búsqueda avanzada
                       </button>
                   </form>
               </li>
@@ -261,7 +261,7 @@ function header_visitor()
                     </li>
 
                     <li class="nav-item">
-                    <form method="get" action="resultado_busqueda.php">
+                    <form method="get" action="resultado_busqueda_admin.php">
                     <div class="form-inline my-2 my-lg-0">
                     <label for="search"></label>
                     <input

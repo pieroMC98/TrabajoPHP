@@ -13,11 +13,10 @@
 <body>
     <?php
     @$_SESSION['login'];
-    
+
     $user = null;
     header_index($user);
     ?>
- 
     <br />
 
     <h1 style="margin-left: 45%;" class="card-title mb-4 mt-1">
@@ -25,7 +24,7 @@
     </h1>
     <div style="margin-left: 25%; margin-right: 25%;" class="card">
         <div class="card-body">
-            <form action="index.php" method="post">
+            <form method="post">
                 <div class="form-group">
                     <label for="email"></label>
                     <input id="email" name="email" class="form-control" placeholder="Correo electrónico" type="email" />
@@ -44,6 +43,19 @@
                 </div>
                 <!-- form-group// -->
             </form>
+            <?php
+            $R = 0;
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+                $q = "Select user from usuario where email like '{$_POST['email']}' and PASSWORD = '{$_POST['password']}'";
+                $query = mysqli_query($conn, $q);
+                if ($p = mysqli_fetch_array($query, 1)) {
+                    $_SESSION['email'] = $_POST['email'];
+                    $_SESSION['password'] = $_POST['password'];
+                    $_SESSION['login'] = $p['user'];
+                    header("Location: index.php");
+                } else echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
+            }
+            ?>
             <button class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='registro.php';">
                 Aún no tengo una cuenta. Registrarme
             </button>

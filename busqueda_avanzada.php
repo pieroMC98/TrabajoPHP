@@ -25,16 +25,16 @@
                         <label for="title">Titulo</label>
                         <input class="form-control" type="text" id="title" name="title" />
                     </div>
+                    <form action="resultado_busqueda_admin" method="get">
                     <div class="form-group" style="padding-top: 10px">
                         <label for="select">Ordenar por:</label>
-                        <select class="form-control" id="select">
+                        <select class="form-control" id="select" name="order">
                             <option value="0" selected>Orden por defecto</option>
                             <option value="1">Mejor valoradas primero</option>
                             <option value="2">Más vistas primero</option>
                             <option value="3">Las cuales he valorado</option>
                         </select>
                     </div>
-                    <form action="resultado_busqueda_admin" method="get">
                         <div class="form-group">
                             <label for="actor">Actor</label>
                             <input class="form-control" type="text" id="actor" name="actor" />
@@ -43,11 +43,7 @@
                             <label for="director">Director</label>
                             <input class="form-control" type="text" id="director" name="director" />
                         </div>
-                        <div class="form-group">
-                            <label for="containt">Contiene las palabras...</label>
-                            <input class="form-control" type="text" id="containt" name="containt" />
-                        </div>
-                        <button type="submit" style="margin-left: 45%;" class="btn btn-outline-success">
+                          <button type="submit" style="margin-left: 45%;" class="btn btn-outline-success">
                             Buscar
                         </button>
                     </form>
