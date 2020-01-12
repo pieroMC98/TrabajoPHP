@@ -16,19 +16,12 @@
     @header_index($_SESSION['email']);
     ?>
     <!--header  -->
-
-
     <br />
     <div class="container">
         <?php
         cuenta_header($_SESSION['login']);
         ?>
     </div>
-
-
-
-
-
     <div class="container">
         <?php cuenta($_SESSION['login']); ?>
     </div>

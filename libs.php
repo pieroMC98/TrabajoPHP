@@ -1,7 +1,7 @@
 <?php
 require 'headers_index.php';
-header('Cache-Control: no cache'); //no cache
-session_cache_limiter('private_no_expire'); // works
+// header('Cache-Control: no cache'); //no cache
+// session_cache_limiter('private_no_expire'); // works
 //session_cache_limiter('public'); // works too
 ob_start();
 session_start();

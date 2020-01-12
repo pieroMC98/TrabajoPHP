@@ -12,8 +12,6 @@
 
 <body>
     <?php
-    @$_SESSION['login'];
-
     $user = null;
     header_index($user);
     ?>
