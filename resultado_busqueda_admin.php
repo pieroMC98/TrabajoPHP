@@ -13,17 +13,17 @@
 </head>
 
 <body>
-    <?php header_administracion();
+    <?php 
+     @header_index($_SESSION['email']);
     $var[] = $_GET['title'];
     @$var[] = $_GET['actor'];
     @$var[] = $_GET['director'];
     @$var[] = $_GET['order'];
-    $conexion = connectBD();
     ?>
     <br />
     <h1 class="h1 container">Resultado de la búsqueda:</h1>
     <div class="container">
-        <?php resultado_busqueda($var, $conexion) ?>
+        <?php resultado_busqueda($var, $_SESSION['conn']) ?>
     </div>
 
     <footer>

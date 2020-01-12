@@ -167,12 +167,13 @@ function resultado_busqueda($var)
     $q[2] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
   }
 
-  if ($var[3] == 2 && isset($_SESSION['login']))
-    $q[3] = "and rating.user = '{$_SESSION['login']}'";
-  else {
-    echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
-    exit;
-  }
+  if ((int) $var[3] == 2)
+    if ($_SESSION['login'] != null)
+      $q[3] = "and rating.user = '{$_SESSION['login']}'";
+    else {
+      echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
+    }
+
   for ($i = 0; $i < count($var); $i++)
     if (strcmp($var[$i], null)) $param .= @$q[$i];
 
@@ -187,7 +188,6 @@ function resultado_busqueda($var)
   }
 
   $query =  mysqli_query($_SESSION['conn'], $param);
-
   printFimls($query);
 }
 

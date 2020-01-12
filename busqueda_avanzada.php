@@ -25,7 +25,7 @@
                         <label for="title">Titulo</label>
                         <input class="form-control" type="text" id="title" name="title" />
                     </div>
-                    <form action="resultado_busqueda_admin" method="get">
+                    <form action="resultado_busqueda_admin.php" method="get">
                     <div class="form-group" style="padding-top: 10px">
                         <label for="select">Ordenar por:</label>
                         <select class="form-control" id="select" name="order">
