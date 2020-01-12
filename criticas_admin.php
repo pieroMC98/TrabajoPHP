@@ -19,7 +19,7 @@
     ?>
  
     <div class="container">
-        <h1 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(255, 255, 255, 0.144);">
+        <h1 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;background-color: rgba(255, 255, 255, 0.144); font-size:40px">
             Sus criticas mas recientes
         </h1>
         <?php
@@ -28,28 +28,29 @@
     </div>
 
     <footer>
-        <a class="footer" href="aviso_legal_admin.html#Aviso_Legal">Aviso Legal</a>
-        |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_privacidad">Política de privacidad</a>
-        |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_Cookies">Política de Cookies</a>
+    <a class="footer" href="aviso_legal_admin.php#Aviso_Legal">Aviso Legal</a>
+    |
+    <a class="footer" href="aviso_legal_admin.php#Politica_de_privacidad">Política de privacidad</a>
+    |
+    <a class="footer" href="aviso_legal_admin.php#Politica_de_Cookies">Política de Cookies</a>
 
-        <br />
+    <br />
 
-        <p class="footerprim">
-            Copyright © iMDMA 2019 | iMDMA es una página de recomendación de cine y
-            series basada en la afinidad entre sus usuarios.<br />
-            iMDMA es un medio independiente, y su principal prioridad es la
-            privacidad, mantenimiento y seguridad de los datos de sus
-            usuarios,información que no comparte fuera de la web con ninguna entidad
-            y/o empresa, bajo ninguna circunstancia.<br />
-            All Rights Reserved - Todos los derechos reservados
-        </p>
-        <p class="footer">
-            Desarrollado por: Sergio Vicente San Gregorio, David Barrios Portales,
-            Piero Mendoza Chang
-        </p>
-    </footer>
+    <p class="footerprim">
+      Copyright © iMDMA 2019 | iMDMA es una página de recomendación de cine y
+      series basada en la afinidad entre sus usuarios.<br />
+      iMDMA es un medio independiente, y su principal prioridad es la
+      privacidad, mantenimiento y seguridad de los datos de sus
+      usuarios,información que no comparte fuera de la web con ninguna entidad
+      y/o empresa, bajo ninguna circunstancia.<br />
+      All Rights Reserved - Todos los derechos reservados
+    </p>
+    <p class="footer">
+      Desarrollado por: Sergio Vicente San Gregorio, David Barrios Portales,
+      Piero Mendoza Chang
+    </p>
+  </footer>
+  
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

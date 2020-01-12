@@ -37,7 +37,7 @@ function header_administracion()
         </li>
         
         <li class="nav-item">
-        <a class="nav-link" href="contacto_admin.php">Contacto</a>
+        <a class="nav-link" href="contacto.php">Contacto</a>
         </li>
         
         <li class="nav-item">
@@ -206,7 +206,6 @@ function header_log()
                               <li style="margin:10px">
                               <a class="drop" href="criticas_admin.php">Ver tus criticas</a>
                               </li>
-                              <li class="dropdown-divider"></li>
               
                               </ul>
                               </div>

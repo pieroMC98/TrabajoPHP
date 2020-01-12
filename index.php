@@ -32,7 +32,7 @@
         <h1 id="estrenos">Próximos estrenos</h1>
         <div class="row">
             <div class="col-sm">
-                <img src="img/proximos/knives.jpg" alt="Knives Out" title="Knives Out" class="rounded float-left index" />
+                <img src="img/proximos/jumanji.jpg" alt="Jumanji" title="Jumanji" class="rounded float-left index" />
             </div>
             <div class="col-sm">
                 <img src="img/proximos/ladron.jpg" alt="La hija de un ladrón" title="La hija de un ladrón" class="rounded float-left index" />
@@ -55,10 +55,10 @@
     </div>
     <br>
     <footer>
-        <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |
-        <a class="footer" href="aviso_legal.html#Politica_de_privacidad">Política de privacidad</a>
+        <a class="footer" href="aviso_legal.php#Aviso_legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.php#Politica_de_privacidad">Politica de privacidad</a>
         |
-        <a class="footer" href="aviso_legal.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.php#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 

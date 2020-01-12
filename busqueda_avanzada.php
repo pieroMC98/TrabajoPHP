@@ -25,7 +25,7 @@
                         <label for="title">Titulo</label>
                         <input class="form-control" type="text" id="title" name="title" />
                     </div>
-                    <form action="resultado_busqueda_admin.php" method="get">
+                    <form action="resultado_busqueda_admin" method="get">
                     <div class="form-group" style="padding-top: 10px">
                         <label for="select">Ordenar por:</label>
                         <select class="form-control" id="select" name="order">
@@ -52,10 +52,10 @@
     </div>
 
     <footer>
-        <a class="footer" href="aviso_legal_admin.html#Aviso_Legal">Aviso Legal</a> |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_privacidad">Política de privacidad</a>
+        <a class="footer" href="aviso_legal.php#Aviso_legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.php#Politica_de_privacidad">Politica de privacidad</a>
         |
-        <a class="footer" href="aviso_legal_admin.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.php#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 

@@ -31,10 +31,10 @@
         <?php printFav($query); ?>
     </div>
     <footer>
-        <a class="footer" href="aviso_legal_log.html">Aviso Legal</a> |
-        <a class="footer" href="aviso_legal_log.html#Politica_de_privacidad">Política de privacidad</a>
+        <a class="footer" href="aviso_legal.php#Aviso_legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.php#Politica_de_privacidad">Politica de privacidad</a>
         |
-        <a class="footer" href="aviso_legal_log.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.php#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 

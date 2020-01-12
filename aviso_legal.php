@@ -12,17 +12,15 @@
 </head>
 
 <body>
-    <?php header_visitor(); ?>
-
-    <h1 class="display-1 container" style="color: black;margin: 3% 15% 2% 14%; text-align: left;
-    background-color: rgba(240, 233, 243, 0.034);">
-        PRIVACIDAD
-    </h1>
+    
+    <?php
+    @header_index($_SESSION['email']);
+    ?>
 
     <article style="margin: 3% 15% 5% 15%; text-align: left;color: rgba(12, 1, 1, 0.883);
     background-color: rgba(240, 233, 243, 0.034);">
         <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;
-      background-color: rgba(255, 255, 255, 0);" id="Aviso_legal">
+      background-color: rgba(255, 255, 255, 0); font-size:40px" id="Aviso_legal">
             Aviso legal
         </h2>
         <p>
@@ -59,7 +57,7 @@
         </p>
 
         <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%;
-        background-color: rgba(255, 255, 255, 0.144);" id="Politica_de_privacidad">
+        background-color: rgba(255, 255, 255, 0.144); font-size:40px" id="Politica_de_privacidad">
             Política de privacidad
         </h2>
         <p>
@@ -105,17 +103,17 @@
             datos de carácter personal.
         </p>
 
-        <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%; background-color: rgba(0, 0, 0, 0);" id="Politica_de_Cookies">
+        <h2 class="display-4" style="color: #007bff; margin-bottom: 1%; margin-top: 3%; padding-top: 1%; background-color: rgba(0, 0, 0, 0); font-size:40px" id="Politica_de_Cookies">
             Política de Cookies
         </h2>
         <p>Estamos totalmente a favor de esas galletas.</p>
     </article>
 
     <footer>
-        <a class="footer" href="aviso_legal.html#Aviso_legal">Aviso Legal</a> |
-        <a class="footer" href="aviso_legal.html#Politica_de_privacidad">Politica de privacidad</a>
+        <a class="footer" href="aviso_legal.php#Aviso_legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.php#Politica_de_privacidad">Politica de privacidad</a>
         |
-        <a class="footer" href="aviso_legal.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.php#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 

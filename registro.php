@@ -14,10 +14,6 @@
 
 <body>
     <?php
-    if (isset($_SESSION['login'])) {
-        echo 'Hola';
-    } else echo 'Sin Session';
-
     @header_index($_SESSION['email']);
     ?>
     <div class="containernav">
@@ -117,10 +113,10 @@
     </div>
 
     <footer>
-        <a class="footer" href="aviso_legal.html#Aviso_Legal">Aviso Legal</a> |
-        <a class="footer" href="aviso_legal.html#Politica_de_privacidad">Politica de privacidad</a>
+        <a class="footer" href="aviso_legal.php#Aviso_legal">Aviso Legal</a> |
+        <a class="footer" href="aviso_legal.php#Politica_de_privacidad">Politica de privacidad</a>
         |
-        <a class="footer" href="aviso_legal.html#Politica_de_Cookies">Política de Cookies</a>
+        <a class="footer" href="aviso_legal.php#Politica_de_Cookies">Política de Cookies</a>
 
         <br />
 
