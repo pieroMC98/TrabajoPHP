@@ -31,8 +31,7 @@
                         <select class="form-control" id="select" name="order">
                             <option value="0" selected>Orden por defecto</option>
                             <option value="1">Mejor valoradas primero</option>
-                            <option value="2">Más vistas primero</option>
-                            <option value="3">Las cuales he valorado</option>
+                              <option value="2">Las cuales he valorado</option>
                         </select>
                     </div>
                         <div class="form-group">

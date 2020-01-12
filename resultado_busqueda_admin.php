@@ -21,7 +21,7 @@
     $conexion = connectBD();
     ?>
     <br />
-    <h1 id="cartelera">Resultado de la búsqueda:</h1>
+    <h1 class="h1 container">Resultado de la búsqueda:</h1>
     <div class="container">
         <?php resultado_busqueda($var, $conexion) ?>
     </div>

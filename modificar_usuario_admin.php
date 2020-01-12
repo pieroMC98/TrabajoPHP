@@ -36,7 +36,7 @@
                     ?>
 
 
-                    <h6>Cambiar foto de perfil..</h6>
+                    <h6>Cambiar foto de perfil.</h6>
                     <?php
                     if (isset($_SESSION['message']) && $_SESSION['message']) {
                         printf('<b>%s</b>', $_SESSION['message']);
@@ -74,14 +74,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="last_name">Nombre de usuario></label>
+                                    <label for="last_name">Nombre de usuario</label>
                                     <input type="text" class="form-control" name="nick" id="last_name" placeholder="Nombre de usuario" title="Introduce tu nombr de usuario." />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="email">Cambiar email></label>
-                                    <input type="email" class="form-control" name="correo" id="email" placeholder="you@email.com" title="Introduce tu email." />
+                                    <input type="email" class="form-control" name="correo" id="email" placeholder="tu@email.com" title="Introduce tu email." />
                                 </div>
                             </div>
                             <div class="form-group">

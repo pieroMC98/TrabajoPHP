@@ -1,88 +1,4 @@
-DAW1 - iMDMA
-Ayer
-sáb. 22:54
-S
-SERGIO VICENTE SAN GREGORIO ha subido un elemento
-HTML
-administracion.php
-sáb. 20:28
-P
-Has subido un elemento
-Archivo desconocido
-Trabajo.sql
-sáb. 17:44
-P
-Has subido un elemento
-Archivo desconocido
-trabajo.sql
-Anteriormente esta semana
-vie. 19:35
-S
-SERGIO VICENTE SAN GREGORIO ha subido un elemento
-HTML
-favoritos_admin.html
-vie. 17:46
-P
-Has subido un elemento
-Archivo comprimido
-HTML-PHP.zip
-La semana pasada
-3 ene.
-P
-Has subido un elemento
-Archivo comprimido
-iMDMA-BLOQUE1-PHP.zip
-30 dic. 2019
-S
-SERGIO VICENTE SAN GREGORIO ha subido 2 elementos
-SQL
-imdma.sql
-Archivo comprimido
-Bloque1-Grupo1.zip
-El mes pasado
-26 dic. 2019
-S
-SERGIO VICENTE SAN GREGORIO ha subido un elemento
-Archivo comprimido
-iMDMA-BLOQUE1.zip
-26 dic. 2019
-S
-SERGIO VICENTE SAN GREGORIOha movido 238 elementos a la papelera
-JavaScript
-debounce.js
-JavaScript
-getClientRect.js
-JavaScript
-clockwise.js
-JavaScript
-getBoundaries.js
-JavaScript
-find.js
-JavaScript
-getBoundaries.padding.js
-RESTAURAR
-26 dic. 2019
-S
-SERGIO VICENTE SAN GREGORIO ha creado un elemento en
-DAW1 - iMDMA
-Carpeta de Google Drive
-SIN ACCESIBILIDAD
-26 dic. 2019
-S
-SERGIO VICENTE SAN GREGORIOha movido 65 elementos a la papelera
-Carpeta de Google Drive
-images
-Imagen
-favicon-16x16.png
-Carpeta de Google Drive
-js
-Archivo binario
-CNAME
-Archivo desconocido
-feed.xml
-Carpeta de Google Drive
-_sass
-RESTAURAR
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -204,7 +120,8 @@ RESTAURAR
 
     <div style="margin-left: 3%; margin-bottom: 3%;" class="col-md-10">
 
-      <form method="post">
+      <form method="post" action="upload_film.php" enctype="multipart/form-data">
+      
         <input id="fname3" name="fname3" type="text" placeholder="Nombre de la pelicula." class="form-control" />
 
 
@@ -216,11 +133,21 @@ RESTAURAR
 
         <textarea style="margin-top: 3%;" name="fname7" placeholder="Sinopsis de la pelicula." class="form-control" rows="4"></textarea>
 
-        <label for="file-input">file</label>
-        <input style="margin-top: 3%;" name="file-input" id="file-input" type="file" />
+        <?php
+                    if (isset($_SESSION['message']) && $_SESSION['message']) {
+                        printf('<b>%s</b>', $_SESSION['message']);
+                        unset($_SESSION['message']);
+                    }
+                    
+        ?>
+        
+                    
+        <input type="file" name="uploadedFile" />     
         <br />
 
-        <button style="margin: 3% 45%; " type="sumbit" class="btn btn-success">
+        
+
+        <button style="margin: 3% 45%; " type="sumbit" class="btn btn-success" value="Subir" name="uploadBtn">
           Añadir
         </button>
       </form>
@@ -233,10 +160,12 @@ RESTAURAR
         $year = $_POST['fname4'];
         $genero = $_POST['fname5'];
         $sinopsis = $_POST['fname6'];
+        $src = 'img/'. $nombre . '.jpg';
 
-
-        $anadir = "insert into pelicula(title, gener, dropyear, sipnosis) VALUES ('{$nombre}','{$genero}','{$year}','{$sinopsis}');";
+        $anadir = "insert into pelicula(title, gener, dropyear, sipnosis, src) VALUES ('{$nombre}','{$genero}','{$year}','{$sinopsis}', '{$src}');";
         $query =  mysqli_query($_SESSION['conn'], $anadir);
+
+        rename( 'img/' . $_SESSION['login'] . '.jpg', $src);
       }
 
       ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-01-2020 a las 20:27:33
+-- Tiempo de generación: 12-01-2020 a las 12:25:13
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -228,7 +228,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`user`, `nombre`, `apellido`, `email`, `Fnac`, `admin`, `password`, `foto_perfil`) VALUES
 ('abgr', 'Ana Belen', 'Gonzalez Rogado', 'abgr@usal.es', '2020-01-01', 0, 'profesor', NULL),
 ('davidbarrios', 'David', 'Barrios', 'davidbarrios@usal.es', '1997-05-26', 1, '1111', NULL),
-('El trucha', 'javi V.', 'V', 'javi@trucha.es', '2019-12-05', 0, '123', NULL),
+('El trucha', 'JJ', 'VV', 'javi@trucha.es', '2019-12-05', 0, '111', NULL),
 ('PMC', 'piero', 'MC', 'p@usal.es', '1998-07-02', 1, '1111', NULL),
 ('sergiovsg99', 'Sergio', 'Vicente', 'sergiovsg99@usal.es', '1999-07-14', 1, '1111', NULL),
 ('tomas.rb', 'Tomas', 'Rodriguez Barrios', 'tomas.rb@usal.es', '2020-01-01', 0, 'profesor', NULL);

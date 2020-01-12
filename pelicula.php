@@ -20,25 +20,21 @@
     ?>
 
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 20px; width: 60%;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <form class="navbar-nav mr-auto" method="post">
-                    <label class="nav-item active" for="F">Ficha<span class="sr-only">(current)</span></label>
-                    <input id="F" type="submit" name="option[]" value='0' class="nav-link" />
-
-                    <label class="nav-item active" for="F1">Criticas<span class="sr-only">(current)</span></label>
-                    <input id="F1" type="submit" name="option[]" value='1' class="nav-item active" />
-
-                    <label class="nav-item active" for="F2">Trailer<span class="sr-only">(current)</span></label>
-                    <input id="F2" type="submit" name="option[]" value='2' class="nav-item active" />
+            <div class="container collapse navbar-collapse" id="navbarText">
+                <form class="btn-dark" method="post">
+                    <input id="F" type="submit" name="option[]" value='Ficha' class="btn btn-dark" />
+                    <input id="F1" type="submit" name="option[]" value='Criticas' class="btn btn-dark" />
+                    <input id="F2" type="submit" name="option[]" value='Trailer' class="btn btn-dark" />
                 </form>
             </div>
         </nav>
         <?php
-        $option = 0;
+        $option = 'Ficha';
         $j = @$_POST['option'];
         if (isset($j)) {
             foreach ($j as $key) {
@@ -47,13 +43,13 @@
         }
 
         switch ($option) {
-            case 0:
+            case 'Ficha':
                 printInfo($film['nombre']);
                 break;
-            case 1:
+            case 'Criticas':
                 printCommnet("select * from critica inner join usuario on critica.user = usuario.user where title like '{$film['nombre']}'");
                 break;
-            case 2:
+            case 'Trailer':
                 $row = mysqli_fetch_array(mysqli_query($_SESSION['conn'], "select * from pelicula where title like '{$film['nombre']}'"), 1);
                 $ytf = "https://www.youtube.com/embed/";
                 $src = str_replace('https://www.youtube.com/watch?v=', '', $row['YT']);

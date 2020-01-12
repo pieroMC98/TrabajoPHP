@@ -18,7 +18,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Subir')
     $newFileName =  $_SESSION['login'] . '.' . $fileExtension;
 
     // check if file has one of the following extensions
-    $allowedfileExtensions = array('jpg', 'gif', 'png', 'zip', 'txt', 'xls', 'doc');
+    $allowedfileExtensions = array('jpg');
 
     if (in_array($fileExtension, $allowedfileExtensions))
     {
@@ -42,7 +42,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Subir')
     }
     else
     {
-     // $message = 'La subida ha fallado. ' . implode(',', $allowedfileExtensions);
+      $message = 'La subida ha fallado. El tipo de archivo permitido es "' . implode(',', $allowedfileExtensions) . '".';
     }
   }
   else

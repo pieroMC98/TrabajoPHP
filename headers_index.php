@@ -108,13 +108,7 @@ function header_administracion()
                   >
                   </li>
                   <li class="dropdown-divider"></li>
-                  <li
-                  style="margin:10px; color: black; background-color: rgba(240, 248, 255, 0.02);"
-                  >
-                  <a class="drop" href="preferencias_admin.php"
-                  >Preferencias</a
-                  >
-                  </li>
+         
                   <li
                   style="margin:10px; color: black; background-color: rgba(240, 248, 255, 0.02);"
                   >
@@ -213,9 +207,7 @@ function header_log()
                               <a class="drop" href="criticas.php">Ver tus criticas</a>
                               </li>
                               <li class="dropdown-divider"></li>
-                              <li style="margin:10px">
-                              <a class="drop" href="preferencias.php">Preferencias</a>
-                              </li>
+              
                               </ul>
                               </div>
                               </li>

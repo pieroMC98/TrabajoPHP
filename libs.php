@@ -152,33 +152,32 @@ function printCommnet($query)
 
 function resultado_busqueda($var)
 {
-  $param = "select * from pelicula inner join trabaja on trabaja.title_film = pelicula.title where 1 ";
 
-  $q[0] = "and title like '%{$var[0]}%' ";
-  $q[1] = "and  (nombre like '{$var[1]}' and rol = 'actor') ";
-  $q[2] = "and (nombre like '{$var[2]}' and rol = 'director')";
+  if ($var[3] == 0)  $param = "select * from pelicula where 1 ";
+  else $param = "SELECT *,AVG(rate) as R FROM rating inner join pelicula on rating.title = pelicula.title where 1 ";
+
+  $q[0] = "and rating.title like '%{$var[0]}%' ";
+  $q[1] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[1]}%'  and rol like 'actor' )  ";
+  $q[2] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
+
+  if ($var[3] == 2)
+    $q[3] = "and rating.user = '{$_SESSION['login']}'";
 
   for ($i = 0; $i < count($var); $i++)
-    if (strcmp($var[$i], null)) $param .= $q[$i];
+    if (strcmp($var[$i], null)) $param .= @$q[$i];
 
   switch ($var[3]) {
     case 1:
-      $param .= " order by ";
+      $param .= "  GROUP by rating.title order by R desc";
       break;
 
     case 2:
-      $param .= " order by ";
-      break;
-
-    case 3:
-      $param .= " order by ";
-      break;
-    default:
-      $param .= " group by title";
+      $param .= " group by rating.title";
       break;
   }
 
   $query =  mysqli_query($_SESSION['conn'], $param);
+
   printFimls($query);
 }
 
@@ -276,26 +275,7 @@ function printInfo($film)
 
   echo "<div class=\"main row\">
   <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">
-      <h2>{$row['title']}</h2>
-      <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">
-          <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
-              <span class=\"navbar-toggler-icon\"></span>
-          </button>
-          <div class=\"collapse navbar-collapse\" id=\"navbarText\">
-              <ul class=\"navbar-nav mr-auto\">
-                  <li class=\"nav-item active\">
-                      <a class=\"nav-link\" href=\"#\">Ficha<span class=\"sr-only\">(current)</span></a>
-                  </li>
-                  <li class=\"nav-item\">
-                      <a class=\"nav-link\" href=\"pelicula_critica.php\">Críticas</a>
-                  </li>
-                  <li class=\"nav-item\">
-                      <a class=\"nav-link\" href=\"pelicula_trailer.html\">Trailer</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-
+      <h2>{$row['title']}</h2>      
       <div class=\"container\">
           <div class=\"row\">
               <div class=\"col-sm\">
@@ -351,12 +331,12 @@ function printInfo($film)
                       border-radius: 13px 13px 13px 13px;
                       -moz-border-radius: 13px 13px 13px 13px;
                       -webkit-border-radius: 13px 13px 13px 13px;
-                      
-                      position: absolute;
-                      margin-left: 75%;
-                      margin-top: -21%;
                       border: solid 2px #007bff;
-                      color: black;\">Media <br> {$avgR[0]} / {$avgR[1]} votos</div> 
+                      background-color:#007bff;
+                      margin-bottom: 35px;
+                      text-align: center;
+                      color: white;
+                      font-size: 24px;\">{$avgR[0]}   /   {$avgR[1]} votos </div> 
                       <button class=\"btn btn-primary\" type=\"submit\" name=\"valora\">Valorar</button>
                   </form>
                       <br>
