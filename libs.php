@@ -95,15 +95,15 @@ function printFav($query)
           ><div class="text">' . $row['title'] . '</div>
         </a>
         <div class="float-right borde">
-        <form method="post" action="favoritos.php">
-        <input type="text" style="visibility:hidden" value="1" name="delete"/>
-          <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+        <form method="post">         
+          <button type="submit" name="delete" class="btn btn-outline-danger">Eliminar</button>
           </form>
         </div>
       </div>
     </div>
   </div>';
   }
+
   if (isset($_POST['delete'])) {
     $q = mysqli_query($_SESSION['conn'], $query);
     $row = mysqli_fetch_array($q, 1);
@@ -167,9 +167,12 @@ function resultado_busqueda($var)
     $q[2] = "and  rating.title like ( select title_film from trabaja where apodo like '%{$var[2]}%'  and rol like 'director' )  ";
   }
 
-  if ($var[3] == 2)
+  if ($var[3] == 2 && isset($_SESSION['login']))
     $q[3] = "and rating.user = '{$_SESSION['login']}'";
-
+  else {
+    echo '<div class="alert alert-danger" role="alert">' . "Error: " . 'Inicio de sesión obligatorio' . '</div>';
+    exit;
+  }
   for ($i = 0; $i < count($var); $i++)
     if (strcmp($var[$i], null)) $param .= @$q[$i];
 
@@ -194,30 +197,35 @@ function registro_update($user)
     echo '<div class="alert alert-warning" role="alert">
     passwords don\'t coincide
         </div>';
-    exit();
   } else {
     $q = "update usuario set ";
-    $set[3] = "user = '{$user[3]}' ,";
-    $set[0] = " nombre =  '{$user[0]}',";
-    $set[1] = " apellido = '{$user[1]}',";
-    $set[2] = " email = '{$user[2]}',";
-    $set[6] = " Fnac = '{$user[6]}',";
-    $set[4] = " password = '{$user[4]}',";
-
+    $set[3] = "user = '{$user[3]}' , ";
+    $set[0] = " nombre =  '{$user[0]}', ";
+    $set[1] = " apellido = '{$user[1]}', ";
+    $set[2] = " email = '{$user[2]}', ";
+    $set[6] = " Fnac = '{$user[6]}', ";
+    $set[4] = " password = '{$user[4]}', ";
 
     for ($i = 0; $i < count($user); $i++) {
       if (strcmp($user[$i], null)) $q .= @$set[$i];
     }
 
-    $q[strlen($q) - 1] = ' ';
+    $q[strlen($q) - 2] = ' ';
     $q .= " where user like '{$_SESSION['login']}'";
-
 
     if (mysqli_query($_SESSION['conn'], $q)) {
       echo '<div class="alert alert-success" role="alert">' . "usuario modificado " . '</div>';
-      $_SESSION['email'] = $user['email'];
-      $_SESSION['password'] = $user['pass'];
-      $_SESSION['login'] = $user['nick'];
+
+      if ($user[2] != null)
+        $_SESSION['email'] = $user[2];
+
+
+      if ($user[3] != null)
+        $_SESSION['login'] = $user[3];
+      //echo $user[3];
+
+      $_SESSION['password'] = $user[4];
+
       header("Location: index.php");
     } else {
       echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
@@ -505,6 +513,7 @@ function cuenta($user)
   $query =  mysqli_query($_SESSION['conn'], "select * from usuario where user like '{$user}'");
   // lseek pointer row. [ column ]
   $row = mysqli_fetch_array($query, 1);
+  $admin = null;
   if ($row['admin']) $admin = "<input type=\"button\" class=\"btn btn-success\" value=\"Opciones de administrador\" onclick=\"location.href = 'administracion.html';\" />";
   echo " <div class=\"main row\">
       <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">

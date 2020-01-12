@@ -97,7 +97,6 @@
                                 <div class="col-xs-6">
                                     <label for="Fnac">Cambiar Fecha nacimento</label>
                                     <input type="date" class="form-control" name="Fnac" id="Fnac" placeholder="Contraseña" title="nueva fecha" />
-
                                 </div>
                             </div>
                             <div class="form-group">
@@ -135,7 +134,7 @@
         |
         <a class="footer" href="aviso_legal.html#Politica_de_Cookies">Política de Cookies</a>
 
-        <br />
+        <br>
 
         <p class="footerprim">
             Copyright © iMDMA 2019 | iMDMA es una página de recomendación de cine y
@@ -152,8 +151,8 @@
         </p>
     </footer>
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper.min.js"> </script>
-    <script src="js/bootstrap.min.js"> </script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

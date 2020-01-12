@@ -198,13 +198,13 @@ function header_log()
                         </li>
                         <li class="dropdown-divider"></li>
                         <li style="margin:10px">
-                                  <a class="drop" href="modificar_usuario.php">Modificar tus datos</a>
+                                  <a class="drop" href="modificar_usuario_admin.php">Modificar tus datos</a>
                                   </li>
                                   <li style="margin:10px">
                                   <a class="drop" href="favoritos.php">Ver tus favoritos</a>
                               </li>
                               <li style="margin:10px">
-                              <a class="drop" href="criticas.php">Ver tus criticas</a>
+                              <a class="drop" href="criticas_admin.php">Ver tus criticas</a>
                               </li>
                               <li class="dropdown-divider"></li>
               
