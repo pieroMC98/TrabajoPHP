@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -95,7 +94,6 @@
             $quitarpermisos = "UPDATE usuario SET admin= '0' WHERE admin = '1' and user like '{$var2}' ";
 
             if (mysqli_query($_SESSION['conn'], $quitarpermisos)) {
-
               echo '<div class="alert alert-success" role="alert">' . $var2 . ' ha dejado de ser administrador.</div>';
             } else {
               echo '<div class="alert alert-danger" role="alert">' . $var2 . ' no era administrador.</div>';
@@ -121,7 +119,7 @@
     <div style="margin-left: 3%; margin-bottom: 3%;" class="col-md-10">
 
       <form method="post" action="upload_film.php" enctype="multipart/form-data">
-      
+
         <input id="fname3" name="fname3" type="text" placeholder="Nombre de la pelicula." class="form-control" />
 
 
@@ -134,18 +132,18 @@
         <textarea style="margin-top: 3%;" name="fname7" placeholder="Sinopsis de la pelicula." class="form-control" rows="4"></textarea>
 
         <?php
-                    if (isset($_SESSION['message']) && $_SESSION['message']) {
-                        printf('<b>%s</b>', $_SESSION['message']);
-                        unset($_SESSION['message']);
-                    }
-                    
+        if (isset($_SESSION['message']) && $_SESSION['message']) {
+          printf('<b>%s</b>', $_SESSION['message']);
+          unset($_SESSION['message']);
+        }
+
         ?>
-        
-                    
-        <input type="file" name="uploadedFile" />     
+
+
+        <input type="file" name="uploadedFile" />
         <br />
 
-        
+
 
         <button style="margin: 3% 45%; " type="sumbit" class="btn btn-success" value="Subir" name="uploadBtn">
           Añadir
@@ -160,12 +158,14 @@
         $year = $_POST['fname4'];
         $genero = $_POST['fname5'];
         $sinopsis = $_POST['fname6'];
-        $src = 'img/'. $nombre . '.jpg';
+        $src = 'img/' . $nombre . '.jpg';
 
         $anadir = "insert into pelicula(title, gener, dropyear, sipnosis, src) VALUES ('{$nombre}','{$genero}','{$year}','{$sinopsis}', '{$src}');";
-        $query =  mysqli_query($_SESSION['conn'], $anadir);
+        if (!($query =  mysqli_query($_SESSION['conn'], $anadir))) {
+          echo '<div class="alert alert-danger" role="alert">' . mysqli_error($_SESSION['conn']) . '</div>';
+        }
 
-        rename( 'img/' . $_SESSION['login'] . '.jpg', $src);
+        rename('img/' . $_SESSION['login'] . '.jpg', $src);
       }
 
       ?>
@@ -188,11 +188,11 @@
       <?php
 
       if (isset($_POST['fname'])) {
-
         $var1 = $_POST['fname'];
-
         $delete_peli = "delete from `pelicula` WHERE title = '{$var1}'";
-        $query =  mysqli_query($_SESSION['conn'], $delete_peli);
+        if (!($query =  mysqli_query($_SESSION['conn'], $delete_peli))) {
+          echo '<div class="alert alert-danger" role="alert">' . mysqli_error($_SESSION['conn']) . '</div>';
+        }
       }
 
       ?>

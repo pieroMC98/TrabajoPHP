@@ -239,7 +239,7 @@ function registro($user)
     echo '<div class="alert alert-warning" role="alert">
     passwords don\'t coincide
         </div>';
-    exit();
+
   } else {
     $param = "insert into usuario values('{$user['nick']}', '{$user['name']}', '{$user['lastName']}', '{$user['email']}','{$user['Fnac']}',false,'{$user['pass']}', null)";
 
@@ -249,6 +249,7 @@ function registro($user)
         echo '<div class="alert alert-success" role="alert">' . "Nuevo usuario insertado" . '</div>';
         $_SESSION['email'] = $user['email'];
         $_SESSION['password'] = $user['pass'];
+        $_SESSION['login'] = $user['nick'];
         header("Location: index.php");
       } else {
         echo '<div class="alert alert-danger" role="alert">' . "Error: " . mysqli_error($_SESSION['conn']) . '</div>';
@@ -287,7 +288,7 @@ function printInfo($film)
   $jd[strlen($jd) - 2] = '.';
 
   $row = mysqli_fetch_array($query, 1);
-
+  $avgR[0] = number_format($avgR[0]);
   echo "<div class=\"main row\">
   <article class=\"col-xs-12 col-sm-9 col-md-9 col-lg-9\">
       <h2>{$row['title']}</h2>      
